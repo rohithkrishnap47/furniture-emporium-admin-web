@@ -570,6 +570,9 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
 
+    <!-- SWEET ALERT CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- PRODUCT SCRIPT -->
     <script>
         var selectedProductid;
@@ -584,11 +587,11 @@
                 .then(response => response.json())
                 .then(data => {
                     category_list = data.data
-                    console.log(data);
+                    console.log(data);  
                     const roleSelect = document.getElementById("categoryDropdown");
                     for (const i of category_list) {
                         const option = document.createElement("option");
-                        option.value = i.categoryName; 
+                        option.value = i.categoryName;
                         option.textContent = i.categoryName;
                         roleSelect.appendChild(option);
                     }
@@ -597,7 +600,7 @@
                     console.error('Error:', error);
                 });
 
-        }   
+        }
         // 
 
         function getProducts() {
@@ -662,23 +665,35 @@
                 deleteButton.classList.add("btn", "btn-danger");
                 deleteButton.textContent = "DELETE";
                 deleteButton.addEventListener("click", function () {
-                    fetch("http://localhost:5001/deleteProducts/" + item._id, {
-                        method: 'DELETE',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-
-                    })
-                        .then(response => response.json())
-                        .then(data => {
-                            console.log(data);
-                            location.reload()
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                        });
-                    console.log("ADMIN DELETE button clicked");
+                    Swal.fire({
+                        title: 'You sure?',
+                        text: "This product will be permanently deleted !",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#1CC88A',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            fetch("http://localhost:5001/deleteProducts/" + item._id, {
+                                method: 'DELETE',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                            })
+                                .then(response => response.json())
+                                .then(data => {
+                                    console.log(data);
+                                    location.reload();
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                });
+                            console.log("DELETE button is clicked!!");
+                        }
+                    });
                 });
+
 
                 buttCell.appendChild(deleteButton);
                 row.appendChild(buttCell);
