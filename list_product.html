@@ -51,10 +51,17 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
+            <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
                 <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>DASHBOARD</span></a>
+            </li>
+            <!-- ADMIN -->
+            <li class="nav-item active">
+                <a class="nav-link" href="list_admin.html">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>ADMIN</span></a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="index.html">
@@ -83,11 +90,11 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>PRODUCTS</span></a>
             </li>
-            <!-- ADMIN -->
+            <!-- BANNER -->
             <li class="nav-item active">
-                <a class="nav-link" href="list_admin.html">
+                <a class="nav-link" href="list_banner.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>ADMIN</span></a>
+                    <span>BANNER</span></a>
             </li>
             <!-- CATEGORY -->
             <!-- <li class="nav-item">
@@ -391,7 +398,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">#admin_here</span>
                                 <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -427,16 +434,19 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Product Tables</h1>
-                    <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-                        For more information about DataTables, please visit the <a target="_blank"
-                            href="https://datatables.net">official DataTables documentation</a>.</p> -->
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <!-- <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6> -->
+                        <div class="card-header py-3"
+                            style="display: flex; justify-content: space-between; align-items: center;">
+
                             <button type="button" class="btn btn-primary" onclick="$('#myModal').modal('show')">Add
                                 PRODUCT</button>
+                            <form id="uploadForm">
+                                <input type="file" id="fileInput" name="file">
+                                <button type="submit" class="btn btn-primary" id="upload-file">Upload</button>
+                                <p id="status"></p>
+                            </form>
                         </div>
 
                         <!-- ADD ADMIN MODAL------------------------------------------- -->
@@ -472,6 +482,21 @@
                                                 <input type="number" class="form-control" id="productprice"
                                                     placeholder="Price">
                                             </div>
+                                            <div class="form-group">
+                                                <label for="role">Discount:</label>
+                                                <input type="number" class="form-control" id="productdiscount"
+                                                    placeholder="Discount">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="role">Quantity:</label>
+                                                <input type="number" class="form-control" id="productstock"
+                                                    placeholder="Quantity">
+                                            </div>
+                                            <!-- <div class="form-group">
+                                                <label for="role">Quantity:</label>
+                                                <input type="number" class="form-control" id="productstock"
+                                                    placeholder="Quantity">
+                                            </div> -->
 
                                         </form>
                                     </div>
@@ -496,6 +521,8 @@
                                             <th>Product Category</th>
                                             <th>Warranty</th>
                                             <th>Price</th>
+                                            <th>Discount</th>
+                                            <th>Stock availability</th>
                                             <th></th>
                                             <th></th>
                                         </tr>
@@ -516,7 +543,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2023</span>
+                        <span>Copyright &copy; Furniture Emporium 2023</span>
                     </div>
                 </div>
             </footer>
@@ -579,15 +606,14 @@
         var products = []
         var category_list = []
         getProducts()
-
         getCategory()
         function getCategory() {
 
-            fetch('http://localhost:5001/categoryAll')
+            fetch('http://localhost:5001/category/categoryAll')
                 .then(response => response.json())
                 .then(data => {
                     category_list = data.data
-                    console.log(data);  
+                    console.log(data);
                     const roleSelect = document.getElementById("categoryDropdown");
                     for (const i of category_list) {
                         const option = document.createElement("option");
@@ -602,9 +628,8 @@
 
         }
         // 
-
         function getProducts() {
-            fetch('http://localhost:5001/productsAll')
+            fetch('http://localhost:5001/product/productsAll')
                 .then(response => response.json())
                 .then(data => {
                     products = data.data
@@ -634,13 +659,25 @@
                 categoryCell.textContent = item.category;
                 row.appendChild(categoryCell);
 
-                const descriptionCell = document.createElement("td");
-                descriptionCell.textContent = item.warranty;
-                row.appendChild(descriptionCell);
+                // const descriptionCell = document.createElement("td");
+                // descriptionCell.textContent = item.description;
+                // row.appendChild(descriptionCell);
 
                 const warrantyCell = document.createElement("td");
-                warrantyCell.textContent = item.price;
+                warrantyCell.textContent = item.warranty;
                 row.appendChild(warrantyCell);
+
+                const priceCell = document.createElement("td");
+                priceCell.textContent = item.price;
+                row.appendChild(priceCell);
+
+                const discountCell = document.createElement("td");
+                discountCell.textContent = item.discount;
+                row.appendChild(discountCell);
+
+                const stockCell = document.createElement("td")
+                stockCell.textContent = item.stock;
+                row.appendChild(stockCell);
 
                 //EDIT BUTTON
                 const buttonCell = document.createElement("td");
@@ -652,7 +689,10 @@
                     document.getElementById("productname").value = item.name
                     document.getElementById("categoryDropdown").value = item.category
                     document.getElementById("productwarranty").value = item.warranty
+                    // document.getElementById("productDescription").value = item.description
                     document.getElementById("productprice").value = item.price
+                    document.getElementById("productdiscount").value = item.discount
+                    document.getElementById("productstock").value = item.stock
                     console.log("PRODUCT UPDATE BUTTON clicked");
                     $('#myModal').modal('show')
                 });
@@ -675,7 +715,7 @@
                         confirmButtonText: 'Yes, delete it!'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            fetch("http://localhost:5001/deleteProducts/" + item._id, {
+                            fetch("http://localhost:5001/product/deleteProducts/" + item._id, {
                                 method: 'DELETE',
                                 headers: {
                                     'Content-Type': 'application/json',
@@ -711,14 +751,18 @@
             var categoryValue = document.getElementById("categoryDropdown").value;
             var warrantyValue = document.getElementById("productwarranty").value;
             var priceValue = document.getElementById("productprice").value;
+            var discountValue = document.getElementById("productdiscount").value;
+            var stockValue = document.getElementById("productstock").value;
             let body = {
+                id: selectedProductid,
                 name: nameValue,
                 category: categoryValue,
                 warranty: warrantyValue,
-                price: priceValue
-
+                price: priceValue,
+                discount: discountValue,
+                stock: stockValue
             }
-            fetch("http://localhost:5001/UpdateProducts/" + selectedProductid, {
+            fetch("http://localhost:5001/product/UpdateProducts", {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -728,7 +772,7 @@
                 .then(response => response.json())
                 .then(data => {
                     selectedProductid = ""
-                    console.log(data);
+                    console.log("messs", data);
                     location.reload()
                 })
                 .catch(error => {
@@ -736,21 +780,25 @@
                 });
         }
 
-        // FUN CREATE
+        // FUNCTION CREATE
         function createProduct() {
             var nameValue = document.getElementById("productname").value;
             var categoryValue = document.getElementById("categoryDropdown").value;
             var warrantyValue = document.getElementById("productwarranty").value;
             var priceValue = document.getElementById("productprice").value;
+            var discountValue = document.getElementById("productdiscount").value;
+            var stockValue = document.getElementById("productstock").value;
+            // var sellingValue = document.getElementById("productselling").value;
             let body = {
                 name: nameValue,
                 category: categoryValue,
-
                 warranty: warrantyValue,
-                price: priceValue
-
+                price: priceValue,
+                discount: discountValue,
+                stock: stockValue,
+                // selling_price: sellingValue,
             }
-            fetch("http://localhost:5001/createProducts", {
+            fetch("http://localhost:5001/product/createProducts", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -766,9 +814,30 @@
                     console.error('Error:', error);
                 });
         }
+        // Product FIle upload
+        // UPLOAD PRODUCTS BUTTON   
+        document.getElementById('uploadForm').addEventListener('submit', function (event) {
+            console.log(event)
+            event.preventDefault(); // Prevent the form from submitting the traditional way
 
-
-
+            var formData = new FormData();
+            var fileInput = document.getElementById('fileInput').files[0];
+            formData.append('file', fileInput);
+            fetch('http://localhost:5001/product/upload-products', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('status').innerText = 'File uploaded successfully!';
+                    console.log(data);
+                    
+                })
+                .catch(error => {
+                    document.getElementById('status').innerText = 'Error uploading file.';
+                    console.error('Error:', error);
+                });
+        });
     </script>
 
 </body>

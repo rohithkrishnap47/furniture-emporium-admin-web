@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>category_list</title>
+    <title>Admin list</title>
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -19,6 +19,8 @@
 
     <!-- Custom styles for this template -->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+
 
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -96,42 +98,6 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>BANNER</span></a>
             </li>
-            <!-- CATEGORY -->
-            <!-- <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>CATEGORY</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Category :</h6>
-                        <a class="collapse-item" href="/categoryadd.html">ADD CATEGORY</a>
-                        <a class="collapse-item" href="/categoryupdate.html">UPDATE CATEGORY</a>
-                        <a class="collapse-item" href="/categorydelete.html">DELETE CATEGORY</a>
-                    </div>
-                </div>
-            </li> -->
-            <!--  -->
-
-            <!-- PRODUCT -->
-            <!-- <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
-                    aria-expanded="true" aria-controls="collapseThree">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>PRODUCT</span>
-                </a>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="productadd.html">ADD PRODUCT</a>
-                        <a class="collapse-item" href="/productupdate.html">UPDATE PRODUCT</a>
-                        <a class="collapse-item" href="productdelete.html">DELETE PRODUCT</a>
-                    </div>
-                </div>y
-            </li> -->
-
-
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -229,10 +195,9 @@
             <!-- Sidebar Message -->
             <div class="sidebar-card d-none d-lg-flex">
                 <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
-                <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components,
-                    and more!</p>
-                <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to
-                    Pro!</a>
+                <p class="text-center mb-2"><strong>FURNITURE EMPORIUM</strong> </p>
+                <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">
+                </a>
             </div>
 
         </ul>
@@ -448,74 +413,81 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Category Tables</h1>
-                    <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-                        For more information about DataTables, please visit the <a target="_blank"
-                            href="https://datatables.net">official DataTables documentation</a>.</p> -->
-
+                    <h1 class="h3 mb-2 text-gray-800">Admin Tables</h1>
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <!-- <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6> -->
+
+                            <!-- <button onclick="addAdmin()">ADD ADMIN</button> -->
+
                             <button type="button" class="btn btn-primary" onclick="$('#myModal').modal('show')">Add
-                                Category</button>
-                        </div>
+                                Admin</button>
+                            <!-- ADD ADMIN MODAL------------------------------------------- -->
+                            <div class="modal fade" id="myModal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <!-- Modal Header -->
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Add Admin</h4>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
 
-                        <!-- <button type="button" class="btn btn-primary" onclick="$('#myModal').modal('show')">Add
-                            Category</button> -->
+                                        <div class="modal-body">
+                                            <!-- Add your form or content for adding an admin here -->
+                                            <form>
+                                                <div class="form-group">
+                                                    <label for="name">Name:</label>
+                                                    <input type="text" class="form-control" id="name"
+                                                        placeholder="Enter name">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="username">Username:</label>
+                                                    <input type="text" class="form-control" id="username"
+                                                        placeholder="Enter email">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="password">Password:</label>
+                                                    <input type="password" class="form-control" id="password"
+                                                        placeholder="Enter password">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="role">Role:</label>
+                                                    <select class="form-control" id="role">
+                                                        <option value="sub admin">Sub Admin</option>
+                                                        <option value="partner">Partner</option>
+                                                    </select>
+                                                </div>
 
-                        <!-- ADD Category MODAL------------------------------------------- -->
-                        <div class="modal fade" id="myModal">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <!-- Modal Header -->
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">Add Category</h4>
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    </div>
+                                            </form>
+                                        </div>
 
-                                    <div class="modal-body">
-
-                                        <form>
-                                            <div class="form-group">
-                                                <label for="Your Category">Category Name:</label>
-                                                <input type="text" class="form-control" id="categoryname"
-                                                    placeholder="Enter name">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="username">Description:</label>
-                                                <input type="text" class="form-control" id="categorydescription"
-                                                    placeholder="Type Description">
-                                            </div>
-
-
-                                        </form>
-                                    </div>
-
-                                    <!-- Modal footer -->
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary"
-                                            onclick="selectedProductid?updateCategory():createCategory()">Save</button>
-
+                                        <!-- Modal footer -->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary"
+                                                onclick="selectedProductid?updateAdmin(): createAdmin()">Save</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- ------------------------------------------------------------------------- -->
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Category ID</th>
-                                            <th>Category Name</th>
-                                            <th>Category Description</th>
+                                            <th>Banner ID</th>
+                                            <th>Banner Name</th>
+                                            <!-- <th>Status</th> -->
+                                            <th>Username</th>
+                                            <th>Role</th>
                                             <th></th>
                                             <th></th>
                                         </tr>
                                     </thead>
-                                    <tbody id="data-body"></tbody>
+                                    <tbody class="" id="data-body"></tbody>
                                 </table>
                             </div>
                         </div>
@@ -531,7 +503,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Furniture Emporium 2023</span>
+                        <span>Copyright &copy; Your Website 2023</span>
                     </div>
                 </div>
             </footer>
@@ -588,43 +560,54 @@
     <!-- SWEET ALERT CDN -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <!-- ------------------------------------------------------------------------------------------------------------ -->
-    <!-- CATEGORY SCRIPT -->
-    <script>
-        var selectedProductid
-        var category = []
-        getCategory()
-        function getCategory() {
 
-            fetch('http://localhost:5001/category/categoryAll')
+    <!-- ------------------------------------------------------------------------------------------------------------ -->
+    <!-- ADMIN SCRIPT -->
+    <!-- ------------------------------------------------------------------------------------------------------------ -->
+    <script>
+        var selectedProductid;
+        var admin = []
+        getAdmin()
+        function getAdmin() {
+
+            fetch('http://localhost:5001/admin/getAllAdmins')
                 .then(response => response.json())
-                .then(data => {
-                    category = data.data
+                .then((data) => {
+                    admin = data.data
                     console.log(data);
-                    setCat()
+                    setAdmin()
                 })
                 .catch(error => {
                     console.error('Error:', error);
                 });
 
         }
-        function setCat() {
+        function setAdmin() {
             const tbody = document.getElementById("data-body");
 
-            category.forEach(item => {
+            admin.forEach(item => {
                 const row = document.createElement("tr");
 
                 const idCell = document.createElement("td");
-                idCell.textContent = category.indexOf(item) + 1;
+                idCell.textContent = admin.indexOf(item) + 1;
+                // idCell.textContent = item._id;
                 row.appendChild(idCell);
 
                 const nameCell = document.createElement("td");
-                nameCell.textContent = item.categoryName;
+                nameCell.textContent = item.name;
                 row.appendChild(nameCell);
 
-                const descriptionCell = document.createElement("td");
-                descriptionCell.textContent = item.description;
-                row.appendChild(descriptionCell);
+                const statusCell = document.createElement("td");
+                // statusCell.textContent = db.status;
+                row.appendChild(statusCell);
+
+                const usernameCell = document.createElement("td");
+                usernameCell.textContent = item.username;
+                row.appendChild(usernameCell);
+
+                const roleCell = document.createElement("td");
+                roleCell.textContent = item.role;
+                row.appendChild(roleCell);
 
                 //EDIT BUTTON
                 const buttonCell = document.createElement("td");
@@ -633,9 +616,10 @@
                 editButton.textContent = "EDIT";
                 editButton.addEventListener("click", function () {
                     selectedProductid = item._id
-                    document.getElementById("categoryname").value = item.categoryName
-                    document.getElementById("categorydescription").value = item.description
-                    console.log("PRODUCT UPDATE BUTTON clicked");
+                    document.getElementById("name").value = item.name
+                    document.getElementById("username").value = item.username
+                    document.getElementById("password").value = item.password
+                    console.log("ADMIN UPDATE BUTTON clicked");
                     $('#myModal').modal('show')
                 });
                 buttonCell.appendChild(editButton);
@@ -646,10 +630,11 @@
                 const deleteButton = document.createElement("button");
                 deleteButton.classList.add("btn", "btn-danger");
                 deleteButton.textContent = "DELETE";
+
                 deleteButton.addEventListener("click", function () {
                     Swal.fire({
-                        title: 'You Sure?',
-                        text: "This category will be permanently deleted !",
+                        title: 'Are you sure?',
+                        text: "This admin will be permanently deleted !",
                         icon: 'warning',
                         showCancelButton: true,
                         confirmButtonColor: '#1CC88A',
@@ -657,7 +642,7 @@
                         confirmButtonText: 'Yes, delete it!'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            fetch("http://localhost:5001/category/deletecategory/" + item._id, {
+                            fetch("http://localhost:5001/deleteAdmin/" + item._id, {
                                 method: 'DELETE',
                                 headers: {
                                     'Content-Type': 'application/json',
@@ -685,17 +670,19 @@
                 tbody.appendChild(row);
             });
         }
+
         // ---------------------------------------------------------------------------------------------------
 
-        // UPDATE CATEGORY FUNCTION
-        function updateCategory() {
-            var categoryName = document.getElementById("categoryname").value;
-            var description = document.getElementById("categorydescription").value;
+        // UPDATE ADMIN FUNCTION
+        function updateAdmin() {
             let body = {
-                name: categoryName,
-                description: description,
+                name: document.getElementById("name").value,
+                username: document.getElementById("username").value,
+                password: document.getElementById("password").value,
+                role: "sub_admin",
+                status: "Active"
             }
-            fetch("http://localhost:5001/updatecategory/" + selectedProductid, {
+            fetch("http://localhost:5001/updateAdmin/" + selectedProductid, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -715,14 +702,20 @@
 
 
 
-        // ---------------------------------------------------------------------------------------------------
-        // CREATE CATEGORY
-        function createCategory() {
+        // CREATE ADMIN BUTTON
+        function createAdmin() {
+            var nameValue = document.getElementById("name").value;
+            var usernameValue = document.getElementById("username").value;
+            var passwordValue = document.getElementById("password").value;
             let body = {
-                categoryName: document.getElementById("categoryname").value,
-                description: document.getElementById("categorydescription").value,
+                name: nameValue,
+                username: usernameValue,
+                password: passwordValue,
+                role: "sub_admin",
+                status: "Active"
+
             }
-            fetch("http://localhost:5001/category/createCategory", {
+            fetch("http://localhost:5001/adminRegister", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -731,27 +724,17 @@
             })
                 .then(response => response.json())
                 .then(data => {
-                    category = data.data
+                    admin = data.data
                     console.log(data);
-                    if (data.statusCode === 400) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: data.message
-                        })
-                    }
-                    else {
-                        location.reload()
-                    }
-
+                    location.reload()
                 })
                 .catch(error => {
                     console.error('Error:', error);
                 });
         }
 
-
     </script>
+
 
 </body>
 

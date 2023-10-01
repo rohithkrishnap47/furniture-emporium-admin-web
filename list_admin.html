@@ -53,10 +53,17 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
+
             <li class="nav-item active">
                 <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>DASHBOARD</span></a>
+            </li>
+            <!-- ADMIN -->
+            <li class="nav-item active">
+                <a class="nav-link" href="list_admin.html">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>ADMIN</span></a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="index.html">
@@ -85,11 +92,11 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>PRODUCTS</span></a>
             </li>
-            <!-- ADMIN -->
+            <!-- BANNER -->
             <li class="nav-item active">
-                <a class="nav-link" href="list_admin.html">
+                <a class="nav-link" href="list_banner.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>ADMIN</span></a>
+                    <span>BANNER</span></a>
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -371,7 +378,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">#admin_here</span>
                                 <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -431,21 +438,21 @@
                                                 <div class="form-group">
                                                     <label for="name">Name:</label>
                                                     <input type="text" class="form-control" id="name"
-                                                        placeholder="Enter name">
+                                                        placeholder="Enter name" name="name">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="username">Username:</label>
                                                     <input type="text" class="form-control" id="username"
-                                                        placeholder="Enter email">
+                                                        placeholder="Enter email" name="username">
                                                 </div>
-                                                <div class="form-group">
+                                                <!-- <div class="form-group">
                                                     <label for="password">Password:</label>
                                                     <input type="password" class="form-control" id="password"
                                                         placeholder="Enter password">
-                                                </div>
+                                                </div> -->
                                                 <div class="form-group">
                                                     <label for="role">Role:</label>
-                                                    <select class="form-control" id="role">
+                                                    <select class="form-control" id="role" name="role">
                                                         <option value="sub admin">Sub Admin</option>
                                                         <option value="partner">Partner</option>
                                                     </select>
@@ -563,7 +570,7 @@
         getAdmin()
         function getAdmin() {
 
-            fetch('http://localhost:5001/getAllAdmins')
+            fetch('http://localhost:5001/admin/getAllAdmins')
                 .then(response => response.json())
                 .then((data) => {
                     admin = data.data
@@ -635,7 +642,7 @@
                         confirmButtonText: 'Yes, delete it!'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            fetch("http://localhost:5001/deleteAdmin/" + item._id, {
+                            fetch("http://localhost:5001/admin/deleteAdmin/" + item._id, {
                                 method: 'DELETE',
                                 headers: {
                                     'Content-Type': 'application/json',
@@ -657,9 +664,6 @@
 
                 buttCell.appendChild(deleteButton);
                 row.appendChild(buttCell);
-
-
-
                 tbody.appendChild(row);
             });
         }
@@ -675,7 +679,7 @@
                 role: "sub_admin",
                 status: "Active"
             }
-            fetch("http://localhost:5001/updateAdmin/" + selectedProductid, {
+            fetch("http://localhost:5001/admin/updateAdmin/" + selectedProductid, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -693,22 +697,21 @@
                 });
         }
 
-
+        // ---------------------------------------------------------------------------------------------------
 
         // CREATE ADMIN BUTTON
         function createAdmin() {
             var nameValue = document.getElementById("name").value;
             var usernameValue = document.getElementById("username").value;
-            var passwordValue = document.getElementById("password").value;
+            // var passwordValue = document.getElementById("password").value;
             let body = {
                 name: nameValue,
                 username: usernameValue,
-                password: passwordValue,
+                // password: passwordValue,
                 role: "sub_admin",
                 status: "Active"
-
             }
-            fetch("http://localhost:5001/adminRegister", {
+            fetch("http://localhost:5001/admin/adminRegister", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -719,7 +722,7 @@
                 .then(data => {
                     admin = data.data
                     console.log(data);
-                    location.reload()
+                     location.reload()
                 })
                 .catch(error => {
                     console.error('Error:', error);
