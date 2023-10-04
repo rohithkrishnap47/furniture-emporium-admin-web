@@ -441,15 +441,10 @@
                                                         placeholder="Enter name" name="name">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="username">Username:</label>
+                                                    <label for="username">Email:</label>
                                                     <input type="text" class="form-control" id="username"
                                                         placeholder="Enter email" name="username">
                                                 </div>
-                                                <!-- <div class="form-group">
-                                                    <label for="password">Password:</label>
-                                                    <input type="password" class="form-control" id="password"
-                                                        placeholder="Enter password">
-                                                </div> -->
                                                 <div class="form-group">
                                                     <label for="role">Role:</label>
                                                     <select class="form-control" id="role" name="role">
@@ -703,11 +698,9 @@
         function createAdmin() {
             var nameValue = document.getElementById("name").value;
             var usernameValue = document.getElementById("username").value;
-            // var passwordValue = document.getElementById("password").value;
             let body = {
                 name: nameValue,
                 username: usernameValue,
-                // password: passwordValue,
                 role: "sub_admin",
                 status: "Active"
             }
@@ -722,7 +715,17 @@
                 .then(data => {
                     admin = data.data
                     console.log(data);
-                     location.reload()
+                    if (data.statusCode === 400) {
+                        Swal.fire({
+                            icon: 'ERROR !',
+                            title: 'Please fill ...',
+                            text: "Required fields :" + data.error.missing
+                        })
+                    }
+                    else {
+                        location.reload()
+                    }
+
                 })
                 .catch(error => {
                     console.error('Error:', error);

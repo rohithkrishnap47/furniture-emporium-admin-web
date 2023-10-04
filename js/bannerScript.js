@@ -8,7 +8,7 @@ function displaybanner() {
     fetch("http://localhost:5001/banner/getAllBanners")
         .then(response => response.json())
         .then(data => {
-            banner = data.
+            banner = data.data
                 console.log(data);
             setBanner()
         })
@@ -17,6 +17,7 @@ function displaybanner() {
         });
 }
 function setBanner() {
+    const tbody = document.getElementById("data-body");
     banner.forEach(item => {
         const row = document.createElement("tr");
 
@@ -25,11 +26,11 @@ function setBanner() {
         row.appendChild(idCell);
 
         const titleCell = document.createElement("td");
-        titleCell.textContent = item.titleCell;
+        titleCell.textContent = item.bannerTitle;        ;
         row.appendChild(titleCell);
 
         const descriptionCell = document.createElement("td");
-        descriptionCell.textContent = item.bannerDescription;
+        descriptionCell.textContent = item.description;
         row.appendChild(descriptionCell);
 
         const imageCell = document.createElement("td");
@@ -42,9 +43,9 @@ function setBanner() {
         editButton.classList.add("btn", "btn-success");
         editButton.textContent = "EDIT";
         editButton.addEventListener("click", function () {
-            selectedProductid = item._id
+            selecteBannerid = item._id
             document.getElementById("bannername").value = item.bannerTitle
-            document.getElementById("bannerdescription ").value = item.bannerDescription
+            document.getElementById("bannerdescription").value = item.description
             document.getElementById("bannerimage").value = item.bannerImage
             console.log("BANNER UPDATE BUTTON clicked");
             $('#myModal').modal('show')
@@ -98,15 +99,44 @@ function setBanner() {
     })
 }
 
+// ---------------------------------------------------------------------------------------------------
+// UPDATE BAnner FUNCTION
+function updateBanner() {
+    // var categoryName = document.getElementById("categoryname").value;
+    // var description = document.getElementById("categorydescription").value;
+    let body = {
+        bannerTitle: document.getElementById("bannername").value,
+        description: document.getElementById("bannerdescription").value,
+        bannerImage: document.getElementById("bannerimage").value,
+    }
+    fetch("http://localhost:5001/banner/updateBanner/" + selecteBannerid, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+    })
+        .then(response => response.json())
+        .then(data => {
+            selecteBannerid = ""
+            console.log(data);
+            location.reload()
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
 // -----------------------------------------------------
 
 // create BANNER
 function createBanner() {
     let body = {
         bannerTitle: document.getElementById("bannername").value,
-        bannerDescription: document.getElementById("bannerdescription").value,
+        description: document.getElementById("bannerdescription").value,
         bannerImage: document.getElementById("bannerimage").value,
     }
+    console.log(body);
     fetch("http://localhost:5001/banner/createBanner", {
         method: 'POST',
         headers: {
@@ -120,9 +150,9 @@ function createBanner() {
             console.log(data);
             if (data.statusCode === 400) {
                 Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: data.message
+                    icon: 'ERROR !',
+                    title: 'Please fill ...',
+                    text: "Required fields :"+data.error.missing
                 })
             }
             else {
