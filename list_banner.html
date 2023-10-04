@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin list</title>
+    <title>Banner List</title>
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -28,6 +28,51 @@
     <style>
         .dataTables_empty {
             display: none;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .banner {
+            background: url('banner-image.jpg') center/cover no-repeat;
+            height: 400px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .banner-content {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .btn-shop {
+            background-color: #ff6600;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-shop:hover {
+            background-color: #cc5500;
         }
     </style>
 
@@ -105,7 +150,7 @@
             <div class="sidebar-heading">
                 Interface
             </div>
-
+            data-body
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
@@ -413,65 +458,60 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Admin Tables</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Banner Table</h1>
+
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
+                            <!-- <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6> -->
+                            <button type="button" class="btn btn-outline-primary"
+                                onclick="$('#myModal').modal('show')">Add
+                                Banner</button>
+                        </div>
 
-                            <!-- <button onclick="addAdmin()">ADD ADMIN</button> -->
+                        <!-- ADD Category MODAL------------------------------------------- -->
+                        <div class="modal fade" id="myModal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Add Banner</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
 
-                            <button type="button" class="btn btn-primary" onclick="$('#myModal').modal('show')">Add
-                                Admin</button>
-                            <!-- ADD ADMIN MODAL------------------------------------------- -->
-                            <div class="modal fade" id="myModal">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <!-- Modal Header -->
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Add Admin</h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
+                                    <div class="modal-body">
 
-                                        <div class="modal-body">
-                                            <!-- Add your form or content for adding an admin here -->
-                                            <form>
-                                                <div class="form-group">
-                                                    <label for="name">Name:</label>
-                                                    <input type="text" class="form-control" id="name"
-                                                        placeholder="Enter name">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="username">Username:</label>
-                                                    <input type="text" class="form-control" id="username"
-                                                        placeholder="Enter email">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="password">Password:</label>
-                                                    <input type="password" class="form-control" id="password"
-                                                        placeholder="Enter password">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="role">Role:</label>
-                                                    <select class="form-control" id="role">
-                                                        <option value="sub admin">Sub Admin</option>
-                                                        <option value="partner">Partner</option>
-                                                    </select>
-                                                </div>
+                                        <form>
+                                            <div class="form-group">
+                                                <label for="Your Category">Banner Title:</label>
+                                                <input type="text" class="form-control" id="bannername"
+                                                    placeholder="Enter Title">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="username">Description:</label>
+                                                <input type="text" class="form-control" id="bannerdescription"
+                                                    placeholder="Banner Description">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="username">Image :</label>
+                                                <input type="text" class="form-control" id="bannerimage"
+                                                    placeholder="Type Description">
+                                            </div>
 
-                                            </form>
-                                        </div>
 
-                                        <!-- Modal footer -->
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary"
-                                                onclick="selectedProductid?updateAdmin(): createAdmin()">Save</button>
-                                        </div>
+                                        </form>
+                                    </div>
+
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary"
+                                            onclick="selectedProductid?updateCategory():createBanner()">Save</button>
+
                                     </div>
                                 </div>
                             </div>
-                            <!-- ------------------------------------------------------------------------- -->
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -479,15 +519,14 @@
                                     <thead>
                                         <tr>
                                             <th>Banner ID</th>
-                                            <th>Banner Name</th>
-                                            <!-- <th>Status</th> -->
-                                            <th>Username</th>
-                                            <th>Role</th>
+                                            <th>Banner Title</th>
+                                            <th>Banner Description</th>
+                                            <th>Banner Image</th>
                                             <th></th>
                                             <th></th>
                                         </tr>
                                     </thead>
-                                    <tbody class="" id="data-body"></tbody>
+                                    <tbody id="data-body"></tbody>
                                 </table>
                             </div>
                         </div>
@@ -497,13 +536,14 @@
                 <!-- /.container-fluid -->
 
             </div>
+
             <!-- End of Main Content -->
 
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2023</span>
+                        <span>Copyright &copy; Furniture Emporium 2023</span>
                     </div>
                 </div>
             </footer>
@@ -559,181 +599,9 @@
 
     <!-- SWEET ALERT CDN -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- bannerScript -->
+    <script src="./js/bannerScript.js"></script>
 
-
-    <!-- ------------------------------------------------------------------------------------------------------------ -->
-    <!-- ADMIN SCRIPT -->
-    <!-- ------------------------------------------------------------------------------------------------------------ -->
-    <script>
-        var selectedProductid;
-        var admin = []
-        getAdmin()
-        function getAdmin() {
-
-            fetch('http://localhost:5001/admin/getAllAdmins')
-                .then(response => response.json())
-                .then((data) => {
-                    admin = data.data
-                    console.log(data);
-                    setAdmin()
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-
-        }
-        function setAdmin() {
-            const tbody = document.getElementById("data-body");
-
-            admin.forEach(item => {
-                const row = document.createElement("tr");
-
-                const idCell = document.createElement("td");
-                idCell.textContent = admin.indexOf(item) + 1;
-                // idCell.textContent = item._id;
-                row.appendChild(idCell);
-
-                const nameCell = document.createElement("td");
-                nameCell.textContent = item.name;
-                row.appendChild(nameCell);
-
-                const statusCell = document.createElement("td");
-                // statusCell.textContent = db.status;
-                row.appendChild(statusCell);
-
-                const usernameCell = document.createElement("td");
-                usernameCell.textContent = item.username;
-                row.appendChild(usernameCell);
-
-                const roleCell = document.createElement("td");
-                roleCell.textContent = item.role;
-                row.appendChild(roleCell);
-
-                //EDIT BUTTON
-                const buttonCell = document.createElement("td");
-                const editButton = document.createElement("button");
-                editButton.classList.add("btn", "btn-success");
-                editButton.textContent = "EDIT";
-                editButton.addEventListener("click", function () {
-                    selectedProductid = item._id
-                    document.getElementById("name").value = item.name
-                    document.getElementById("username").value = item.username
-                    document.getElementById("password").value = item.password
-                    console.log("ADMIN UPDATE BUTTON clicked");
-                    $('#myModal').modal('show')
-                });
-                buttonCell.appendChild(editButton);
-                row.appendChild(buttonCell);
-
-                // DELETE BUTTON
-                const buttCell = document.createElement("td");
-                const deleteButton = document.createElement("button");
-                deleteButton.classList.add("btn", "btn-danger");
-                deleteButton.textContent = "DELETE";
-
-                deleteButton.addEventListener("click", function () {
-                    Swal.fire({
-                        title: 'Are you sure?',
-                        text: "This admin will be permanently deleted !",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#1CC88A',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes, delete it!'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            fetch("http://localhost:5001/deleteAdmin/" + item._id, {
-                                method: 'DELETE',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                },
-                            })
-                                .then(response => response.json())
-                                .then(data => {
-                                    console.log(data);
-                                    location.reload();
-                                })
-                                .catch(error => {
-                                    console.error('Error:', error);
-                                });
-                            console.log("DELETE button is clicked!!");
-                        }
-                    });
-                });
-
-
-                buttCell.appendChild(deleteButton);
-                row.appendChild(buttCell);
-
-
-
-                tbody.appendChild(row);
-            });
-        }
-
-        // ---------------------------------------------------------------------------------------------------
-
-        // UPDATE ADMIN FUNCTION
-        function updateAdmin() {
-            let body = {
-                name: document.getElementById("name").value,
-                username: document.getElementById("username").value,
-                password: document.getElementById("password").value,
-                role: "sub_admin",
-                status: "Active"
-            }
-            fetch("http://localhost:5001/updateAdmin/" + selectedProductid, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(body),
-            })
-                .then(response => response.json())
-                .then(data => {
-                    selectedProductid = ""
-                    console.log(data);
-                    location.reload()
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-        }
-
-
-
-        // CREATE ADMIN BUTTON
-        function createAdmin() {
-            var nameValue = document.getElementById("name").value;
-            var usernameValue = document.getElementById("username").value;
-            var passwordValue = document.getElementById("password").value;
-            let body = {
-                name: nameValue,
-                username: usernameValue,
-                password: passwordValue,
-                role: "sub_admin",
-                status: "Active"
-
-            }
-            fetch("http://localhost:5001/adminRegister", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(body),
-            })
-                .then(response => response.json())
-                .then(data => {
-                    admin = data.data
-                    console.log(data);
-                    location.reload()
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-        }
-
-    </script>
 
 
 </body>

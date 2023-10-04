@@ -618,7 +618,7 @@
                     selectedProductid = item._id
                     document.getElementById("name").value = item.name
                     document.getElementById("username").value = item.username
-                    document.getElementById("password").value = item.password
+                    // document.getElementById("password").value = item.password
                     console.log("ADMIN UPDATE BUTTON clicked");
                     $('#myModal').modal('show')
                 });
@@ -675,7 +675,7 @@
             let body = {
                 name: document.getElementById("name").value,
                 username: document.getElementById("username").value,
-                password: document.getElementById("password").value,
+                // password: document.getElementById("password").value,
                 role: "sub_admin",
                 status: "Active"
             }
