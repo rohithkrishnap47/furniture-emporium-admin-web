@@ -95,35 +95,58 @@
     <!-- admin login -->
     <script>
         function login() {
-            
+
             var username = document.getElementById('inputEmail');
             var password = document.getElementById('inputPassword');
 
-           
+
             if (username.value === '' || password.value === '') {
                 alert('Please enter a username and password.');
                 return;
             }
-            let body={
-                username:document.getElementById("inputEmail").value,
-                password:document.getElementById("inputPassword").value,
+            let body = {
+                username: document.getElementById("inputEmail").value,
+                password: document.getElementById("inputPassword").value,
             }
             fetch("http://localhost:5001/auth/login", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
-                    body: JSON.stringify(body),
                 },
+                body: JSON.stringify(body),
             }
             )
-            .then(response=>response.json())
-            .then(data=>{
+                // .then(response => {
+                //     if (!response.ok) {
+                //         throw new Error('Network response was not ok');
+                //     }
+                //     return response.json();
+                // })
+                // .then(data => {
+                //     console.log(data);
+                //     window.location.href = "http://127.0.0.1:5501/index.html";
+                // })
+                // .catch(error => {
+                //     console.error('Error:', error);
+                // });
+            .then(response => response.json())
+            .then(data => {
                 console.log(data);
-                // window.location.href="http://localhost:5001/index.html"
+                window.location = "http://127.0.0.1:5501/index.html"
             })
-            // Submit the login form.
-            // document.querySelector('form').submit();
+
         }
+        // Validator function
+        const bodyRequiredDataValidator = (body, fields) => {
+            let required = []
+            fields.forEach((key) => {
+                if ([undefined, '', null].includes(body[key])) {
+                    required.push(key)
+                }
+            })
+            return required.length ? { "missing": required } : undefined
+        }
+
     </script>
 
 </body>
