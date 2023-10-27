@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>product_list</title>
+    <title>USER List</title>
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -17,19 +17,63 @@
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
-    <!-- Custom styles for this template -->
+    <!-- Custom styles for this template -->    
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
     <style>
         .dataTables_empty {
             display: none;
         }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .banner {
+            background: url('banner-image.jpg') center/cover no-repeat;
+            height: 400px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .banner-content {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .btn-shop {
+            background-color: #ff6600;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-shop:hover {
+            background-color: #cc5500;
+        }
     </style>
 
 </head>
-
 
 <body id="page-top">
 
@@ -74,7 +118,7 @@
                     <span>ORDER</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="list_user.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>USERS</span></a>
             </li>
@@ -96,27 +140,6 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>BANNER</span></a>
             </li>
-            <!-- CATEGORY -->
-            <!-- <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>CATEGORY</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Category :</h6>
-                        <a class="collapse-item" href="/categoryadd.html">ADD CATEGORY</a>
-                        <a class="collapse-item" href="/categoryupdate.html">UPDATE CATEGORY</a>
-                        <a class="collapse-item" href="/categorydelete.html">DELETE CATEGORY</a>
-                    </div>
-                </div>
-            </li> -->
-            <!--  -->
-
-
-
-
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -124,7 +147,7 @@
             <div class="sidebar-heading">
                 Interface
             </div>
-
+            
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
@@ -214,10 +237,9 @@
             <!-- Sidebar Message -->
             <div class="sidebar-card d-none d-lg-flex">
                 <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
-                <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components,
-                    and more!</p>
-                <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to
-                    Pro!</a>
+                <p class="text-center mb-2"><strong>FURNITURE EMPORIUM</strong> </p>
+                <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">
+                </a>
             </div>
 
         </ul>
@@ -299,7 +321,7 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">December 12, 2019</div>
+                                        <div class="small text-gray-500">2023</div>
                                         <span class="font-weight-bold">A new monthly report is ready to download!</span>
                                     </div>
                                 </a>
@@ -310,7 +332,7 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">December 7, 2019</div>
+                                        <div class="small text-gray-500">December 7, 2023</div>
                                         $290.29 has been deposited into your account!
                                     </div>
                                 </a>
@@ -321,8 +343,7 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">December 2, 2019</div>
-                                        Spending Alert: We've noticed unusually high spending for your account.
+                                        <div class="small text-gray-500">FURNITURE EMPORIUM 2023</div>
                                     </div>
                                 </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
@@ -433,70 +454,45 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Product Tables</h1>
+                    <h1 class="h3 mb-2 text-gray-800">USER DETAILS</h1>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3"
-                            style="display: flex; justify-content: space-between; align-items: center;">
-
-                            <button type="button" class="btn btn-primary" onclick="$('#myModal').modal('show')">Add
-                                PRODUCT</button>
-                            <form id="uploadForm">
-                                <input type="file" id="fileInput" name="file">
-                                <button type="submit" class="btn btn-primary" id="upload-file">Upload</button>
-                                <p id="status"></p>
-                            </form>
+                        <div class="card-header py-3">
+                            <!-- <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6> -->
+                            <button type="button" class="btn btn-outline-primary"
+                                onclick="$('#myModal').modal('show')">hihii</button>
                         </div>
 
-                        <!-- ADD ADMIN MODAL------------------------------------------- -->
+                        <!-- ADD Category MODAL------------------------------------------- -->
                         <div class="modal fade" id="myModal">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <!-- Modal Header -->
                                     <div class="modal-header">
-                                        <h4 class="modal-title">Add Products</h4>
+                                        <h4 class="modal-title">Add Banner</h4>
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
 
                                     <div class="modal-body">
-                                        <!-- Add your form or content for adding an admin here -->
+
                                         <form>
                                             <div class="form-group">
-                                                <label for="name">Product Name:</label>
-                                                <input type="text" class="form-control" id="productname"
-                                                    placeholder="Product Name">
+                                                <label for="Your Category">Banner Title:</label>
+                                                <input type="text" class="form-control" id="bannername"
+                                                    placeholder="Enter Title">
                                             </div>
                                             <div class="form-group">
-                                                <label for="username">Product Category:</label>
-                                                <select class="form-control" id="categoryDropdown">
-                                                </select>
+                                                <label for="username">Description:</label>
+                                                <input type="text" class="form-control" id="bannerdescription"
+                                                    placeholder="Banner Description">
                                             </div>
                                             <div class="form-group">
-                                                <label for="warranty">Warranty:</label>
-                                                <input type="date" class="form-control" id="productwarranty"
-                                                    placeholder="Warranty">
+                                                <label for="username">Image :</label>
+                                                <input type="text" class="form-control" id="bannerimage"
+                                                    placeholder="Browse Image">
                                             </div>
-                                            <div class="form-group">
-                                                <label for="role">Price:</label>
-                                                <input type="number" class="form-control" id="productprice"
-                                                    placeholder="Price">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="role">Discount:</label>
-                                                <input type="number" class="form-control" id="productdiscount"
-                                                    placeholder="Discount">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="role">Quantity:</label>
-                                                <input type="number" class="form-control" id="productstock"
-                                                    placeholder="Quantity">
-                                            </div>
-                                            <!-- <div class="form-group">
-                                                <label for="role">Quantity:</label>
-                                                <input type="number" class="form-control" id="productstock"
-                                                    placeholder="Quantity">
-                                            </div> -->
+
 
                                         </form>
                                     </div>
@@ -506,7 +502,8 @@
                                         <button type="button" class="btn btn-secondary"
                                             data-dismiss="modal">Close</button>
                                         <button type="button" class="btn btn-primary"
-                                            onclick="selectedProductid?updateProduct(): createProduct()">Save</button>
+                                            onclick="selecteBannerid?updateBanner():createBanner()">Save</button>
+
                                     </div>
                                 </div>
                             </div>
@@ -516,13 +513,11 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
-                                            <th>Product Name</th>
-                                            <th>Product Category</th>
-                                            <th>Warranty</th>
-                                            <th>Price</th>
-                                            <th>Discount</th>
-                                            <th>Stock availability</th>
+                                            <th>USER ID</th>
+                                            <th>Username</th>
+                                            <th>Email Verified</th>
+                                            <th>Status</th>
+                                            <th>Status</th>
                                             <th></th>
                                             <th></th>
                                         </tr>
@@ -537,6 +532,7 @@
                 <!-- /.container-fluid -->
 
             </div>
+
             <!-- End of Main Content -->
 
             <!-- Footer -->
@@ -599,257 +595,10 @@
 
     <!-- SWEET ALERT CDN -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <!-- PRODUCT SCRIPT -->
-    <script>
-        var selectedProductid;
-        var products = []
-        var category_list = []
-        getProducts()
-        getCategory()
-        function getCategory() {
-
-            fetch('http://localhost:5001/category/categoryAll')
-                .then(response => response.json())
-                .then(data => {
-                    category_list = data.data
-                    console.log(data);
-                    const roleSelect = document.getElementById("categoryDropdown");
-                    for (const i of category_list) {
-                        const option = document.createElement("option");
-                        option.value = i.categoryName;
-                        option.textContent = i.categoryName;
-                        roleSelect.appendChild(option);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-
-        }
-        // 
-        function getProducts() {
-            fetch('http://localhost:5001/product/productsAll')
-                .then(response => response.json())
-                .then(data => {
-                    products = data.data
-                    console.log(data);
-                    setData()
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-
-        }
-        function setData() {
-            const tbody = document.getElementById("data-body");
-
-            products.forEach(item => {
-                const row = document.createElement("tr");
-
-                const indexCell = document.createElement("td");
-                indexCell.textContent = products.indexOf(item) + 1;
-                row.appendChild(indexCell);
-
-                const nameCell = document.createElement("td");
-                nameCell.textContent = item.name;
-                row.appendChild(nameCell);
-
-                const categoryCell = document.createElement("td");
-                categoryCell.textContent = item.category;
-                row.appendChild(categoryCell);
-
-                // const descriptionCell = document.createElement("td");
-                // descriptionCell.textContent = item.description;
-                // row.appendChild(descriptionCell);
-
-                const warrantyCell = document.createElement("td");
-                warrantyCell.textContent = item.warranty;
-                row.appendChild(warrantyCell);
-
-                const priceCell = document.createElement("td");
-                priceCell.textContent = item.price;
-                row.appendChild(priceCell);
-
-                const discountCell = document.createElement("td");
-                discountCell.textContent = item.discount;
-                row.appendChild(discountCell);
-
-                const stockCell = document.createElement("td")
-                stockCell.textContent = item.stock;
-                row.appendChild(stockCell);
-
-                //EDIT BUTTON
-                const buttonCell = document.createElement("td");
-                const editButton = document.createElement("button");
-                editButton.classList.add("btn", "btn-success");
-                editButton.textContent = "EDIT";
-                editButton.addEventListener("click", function () {
-                    selectedProductid = item._id
-                    document.getElementById("productname").value = item.name
-                    document.getElementById("categoryDropdown").value = item.category
-                    document.getElementById("productwarranty").value = item.warranty
-                    // document.getElementById("productDescription").value = item.description
-                    document.getElementById("productprice").value = item.price
-                    document.getElementById("productdiscount").value = item.discount
-                    document.getElementById("productstock").value = item.stock
-                    console.log("PRODUCT UPDATE BUTTON clicked");
-                    $('#myModal').modal('show')
-                });
-                buttonCell.appendChild(editButton);
-                row.appendChild(buttonCell);
-
-                // DELETE BUTTON
-                const buttCell = document.createElement("td");
-                const deleteButton = document.createElement("button"); +
-                    deleteButton.classList.add("btn", "btn-danger");
-                deleteButton.textContent = "DELETE";
-                deleteButton.addEventListener("click", function () {
-                    Swal.fire({
-                        title: 'You sure?',
-                        text: "This product will be permanently deleted !",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#1CC88A',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes, delete it!'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            fetch("http://localhost:5001/product/deleteProducts/" + item._id, {
-                                method: 'DELETE',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                },
-                            })
-                                .then(response => response.json())
-                                .then(data => {
-                                    console.log(data);
-                                    location.reload();
-                                })
-                                .catch(error => {
-                                    console.error('Error:', error);
-                                });
-                            console.log("DELETE button is clicked!!");
-                        }
-                    });
-                });
+    <!-- bannerScript -->
+    <script src="./js/userScript.js"></script>
 
 
-                buttCell.appendChild(deleteButton);
-                row.appendChild(buttCell);
-
-
-
-                tbody.appendChild(row);
-            });
-        }
-
-
-        // UPDATE PRODUCT FUNCTION
-        function updateProduct() {
-            var nameValue = document.getElementById("productname").value;
-            var categoryValue = document.getElementById("categoryDropdown").value;
-            var warrantyValue = document.getElementById("productwarranty").value;
-            var priceValue = document.getElementById("productprice").value;
-            var discountValue = document.getElementById("productdiscount").value;
-            var stockValue = document.getElementById("productstock").value;
-            let body = {
-                id: selectedProductid,
-                name: nameValue,
-                category: categoryValue,
-                warranty: warrantyValue,
-                price: priceValue,
-                discount: discountValue,
-                stock: stockValue
-            }
-            fetch("http://localhost:5001/product/UpdateProducts", {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(body),
-            })
-                .then(response => response.json())
-                .then(data => {
-                    selectedProductid = ""
-                    console.log("messs", data);
-                    location.reload()
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-        }
-
-        // FUNCTION CREATE
-        function createProduct() {
-            var nameValue = document.getElementById("productname").value;
-            var categoryValue = document.getElementById("categoryDropdown").value;
-            var warrantyValue = document.getElementById("productwarranty").value;
-            var priceValue = document.getElementById("productprice").value;
-            var discountValue = document.getElementById("productdiscount").value;
-            var stockValue = document.getElementById("productstock").value;
-            // var sellingValue = document.getElementById("productselling").value;
-            let body = {
-                name: nameValue,
-                category: categoryValue,
-                warranty: warrantyValue,
-                price: priceValue,
-                discount: discountValue,
-                stock: stockValue,
-                // selling_price: sellingValue,
-            }
-            fetch("http://localhost:5001/product/createProducts", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(body),
-            })
-                .then(response => response.json())
-                .then(data => {
-                    products = data.data
-                    console.log(data);
-                    if (data.statusCode === 400) {
-                        Swal.fire({
-                            icon: 'ERROR !',
-                            title: 'Please fill ...',
-                            text: "Required fields :" + data.error.missing
-                        })
-                    }
-                    else {
-                        location.reload()
-                    }
-
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-        }
-        // Product FIle upload
-        // UPLOAD PRODUCTS BUTTON   
-        document.getElementById('uploadForm').addEventListener('submit', function (event) {
-            console.log(event)
-            event.preventDefault(); // Prevent the form from submitting the traditional way
-
-            var formData = new FormData();
-            var fileInput = document.getElementById('fileInput').files[0];
-            formData.append('file', fileInput);
-            fetch('http://localhost:5001/product/upload-products', {
-                method: 'POST',
-                body: formData
-            })
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('status').innerText = 'File uploaded successfully!';
-                    console.log(data);
-
-                })
-                .catch(error => {
-                    document.getElementById('status').innerText = 'Error uploading file.';
-                    console.error('Error:', error);
-                });
-        });
-    </script>
 
 </body>
 

@@ -1,15 +1,15 @@
 // // -----------------------------------------------------
 
 
-var selecteBannerid;
-var banner = []
+var selectuserid;
+var user = []
 displaybanner()
 function displaybanner() {
     fetch("http://localhost:5001/banner/getAllBanners")
         .then(response => response.json())
         .then(data => {
-            banner = data.data
-            console.log(data);
+            user = data.data
+                console.log(data);
             setBanner()
         })
         .catch(error => {
@@ -18,45 +18,25 @@ function displaybanner() {
 }
 function setBanner() {
     const tbody = document.getElementById("data-body");
-    banner.forEach(item => {
+    user.forEach(item => {
         const row = document.createElement("tr");
 
         const idCell = document.createElement("td");
-        idCell.textContent = banner.indexOf(item) + 1;
+        idCell.textContent = user.indexOf(item) + 1;
         row.appendChild(idCell);
 
-        const titleCell = document.createElement("td");
-        titleCell.textContent = item.bannerTitle;;
-        row.appendChild(titleCell);
+        const userCell = document.createElement("td");
+        userCell.textContent = item.username;        ;
+        row.appendChild(userCell);
 
-        const descriptionCell = document.createElement("td");
-        descriptionCell.textContent = item.description;
-        row.appendChild(descriptionCell);
+        const emailCell = document.createElement("td");
+        emailCell.textContent = item.isEmailverified;
+        row.appendChild(emailCell);
 
-        const imageCell = document.createElement("td");
-        const imageElement = document.createElement("img");
-        imageElement.src = item.bannerImage;
-        imageElement.alt = "Banner Image";
-        imageElement.width = 150;
-        imageElement.height = 150;
-        imageCell.appendChild(imageElement)
-        row.appendChild(imageCell);
+        const statusCell = document.createElement("td");
+        statusCell.textContent = item.userStatus;
+        row.appendChild(statusCell);
 
-        //EDIT BUTTON
-        const buttonCell = document.createElement("td");
-        const editButton = document.createElement("button");
-        editButton.classList.add("btn", "btn-success");
-        editButton.textContent = "EDIT";
-        editButton.addEventListener("click", function () {
-            selecteBannerid = item._id
-            document.getElementById("bannername").value = item.bannerTitle
-            document.getElementById("bannerdescription").value = item.description
-            document.getElementById("bannerimage").value = item.bannerImage
-            console.log("BANNER UPDATE BUTTON clicked");
-            $('#myModal').modal('show')
-        });
-        buttonCell.appendChild(editButton);
-        row.appendChild(buttonCell);
 
 
         // DELETE BUTTON
@@ -67,7 +47,7 @@ function setBanner() {
         deleteButton.addEventListener("click", function () {
             Swal.fire({
                 title: 'You Sure?',
-                text: "This banner will be permanently deleted !",
+                text: "This user will be permanently deleted !",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#1CC88A',
@@ -75,7 +55,7 @@ function setBanner() {
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    fetch("http://localhost:5001/banner/deleteBanner/" + item._id, {
+                    fetch("http://localhost:5001/user/userDelete/" + item._id, {
                         method: 'DELETE',
                         headers: {
                             'Content-Type': 'application/json',
@@ -114,7 +94,7 @@ function updateBanner() {
         description: document.getElementById("bannerdescription").value,
         bannerImage: document.getElementById("bannerimage").value,
     }
-    fetch("http://localhost:5001/banner/updateBanner/" + selecteBannerid, {
+    fetch("http://localhost:5001/banner/updateBanner/" + selectuserid, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -123,7 +103,7 @@ function updateBanner() {
     })
         .then(response => response.json())
         .then(data => {
-            selecteBannerid = ""
+            selectuserid = ""
             console.log(data);
             location.reload()
         })
@@ -139,24 +119,15 @@ function createBanner() {
     let body = {
         bannerTitle: document.getElementById("bannername").value,
         description: document.getElementById("bannerdescription").value,
+        bannerImage: document.getElementById("bannerimage").value,
     }
     console.log(body);
-    let formData = new FormData();
-    formData.append('bannerTitle', document.getElementById("bannername").value);
-    formData.append('description', document.getElementById("bannerdescription").value);
-
-    let imageInput = document.getElementById("bannerimage");
-    let imageFile = imageInput.files[0];
-
-    // Append the image file to FormData
-    formData.append('file', imageFile);
-
-    console.log(formData);
-
-    // Send the request with FormData
-    fetch("http://localhost:5001/banner/createbanner", {
+    fetch("http://localhost:5001/banner/createBanner", {
         method: 'POST',
-        body: formData
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body)
     })
         .then(response => response.json())
         .then(data => {
@@ -166,7 +137,7 @@ function createBanner() {
                 Swal.fire({
                     icon: 'ERROR !',
                     title: 'Please fill ...',
-                    text: "Required fields :" + data.error.missing
+                    text: "Required fields :"+data.error.missing
                 })
             }
             else {
