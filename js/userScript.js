@@ -1,24 +1,24 @@
 // // -----------------------------------------------------
-
+// http://localhost:5001/auth/login
 
 var selectuserid;
 var user = []
-displaybanner()
-function displaybanner() {
-    fetch("http://localhost:5001/banner/getAllBanners")
+displayuser()
+function displayuser() {
+    fetch("http://localhost:5001/user/listusers")
         .then(response => response.json())
         .then(data => {
             user = data.data
-                console.log(data);
-            setBanner()
+                console.log("deiiiii",data.data);
+            setUser()
         })
         .catch(error => {
             console.error("the error is:", error);
         });
 }
-function setBanner() {
+function setUser() {
     const tbody = document.getElementById("data-body");
-    user.forEach(item => {
+    user?.forEach(item => {
         const row = document.createElement("tr");
 
         const idCell = document.createElement("td");
@@ -26,11 +26,11 @@ function setBanner() {
         row.appendChild(idCell);
 
         const userCell = document.createElement("td");
-        userCell.textContent = item.username;        ;
+        userCell.textContent = item.firstname;        ;
         row.appendChild(userCell);
 
         const emailCell = document.createElement("td");
-        emailCell.textContent = item.isEmailverified;
+        emailCell.textContent = item.emailaddress;
         row.appendChild(emailCell);
 
         const statusCell = document.createElement("td");
@@ -85,7 +85,7 @@ function setBanner() {
 }
 
 // ---------------------------------------------------------------------------------------------------
-// UPDATE BAnner FUNCTION
+// UPDATE USER FUNCTION
 function updateBanner() {
     // var categoryName = document.getElementById("categoryname").value;
     // var description = document.getElementById("categorydescription").value;

@@ -51,7 +51,7 @@ function setBanner() {
             selecteBannerid = item._id
             document.getElementById("bannername").value = item.bannerTitle
             document.getElementById("bannerdescription").value = item.description
-            document.getElementById("bannerimage").value = item.bannerImage
+            // document.getElementById("bannerimage").value = item.bannerImage
             console.log("BANNER UPDATE BUTTON clicked");
             $('#myModal').modal('show')
         });
@@ -107,25 +107,26 @@ function setBanner() {
 // ---------------------------------------------------------------------------------------------------
 // UPDATE BAnner FUNCTION
 function updateBanner() {
-    // var categoryName = document.getElementById("categoryname").value;
-    // var description = document.getElementById("categorydescription").value;
-    let body = {
-        bannerTitle: document.getElementById("bannername").value,
-        description: document.getElementById("bannerdescription").value,
-        bannerImage: document.getElementById("bannerimage").value,
-    }
+    let formData = new FormData();
+    formData.append('bannerTitle', document.getElementById("bannername").value);
+    formData.append('description', document.getElementById("bannerdescription").value);
+
+    // Get the image file from the input element
+    let imageInput = document.getElementById("bannerimage");
+    let imageFile = imageInput.files[0]; // Assuming the input is of type 'file'
+
+    // Append the image file to FormData
+    formData.append('bannerImage', imageFile);
+
     fetch("http://localhost:5001/banner/updateBanner/" + selecteBannerid, {
         method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body),
+        body: formData // Set the FormData object as the body
     })
         .then(response => response.json())
         .then(data => {
             selecteBannerid = ""
             console.log(data);
-            location.reload()
+            // location.reload()
         })
         .catch(error => {
             console.error('Error:', error);
