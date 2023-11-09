@@ -142,7 +142,7 @@
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
@@ -158,7 +158,7 @@
                         <a class="collapse-item" href="utilities-other.html">Other</a>
                     </div>
                 </div>
-            </li>
+            </li> -->
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -169,13 +169,13 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Pages</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                </a> -->
+            <!-- <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Login Screens:</h6>
                         <a class="collapse-item" href="login.html">Login</a>
@@ -186,8 +186,8 @@
                         <a class="collapse-item" href="404.html">404 Page</a>
                         <a class="collapse-item" href="blank.html">Blank Page</a>
                     </div>
-                </div>
-            </li>
+                </div> -->
+            <!-- </li> -->
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
@@ -442,11 +442,11 @@
 
                             <button type="button" class="btn btn-primary" onclick="$('#myModal').modal('show')">Add
                                 PRODUCT</button>
-                            <form id="uploadForm">
+                            <!-- <form id="uploadForm">
                                 <input type="file" id="fileInput" name="file">
                                 <button type="submit" class="btn btn-primary" id="upload-file">Upload</button>
                                 <p id="status"></p>
-                            </form>
+                            </form> -->
                         </div>
 
                         <!-- ADD ADMIN MODAL------------------------------------------- -->
@@ -492,6 +492,11 @@
                                                 <input type="number" class="form-control" id="productstock"
                                                     placeholder="Quantity">
                                             </div>
+                                            <div class="form-group">
+                                                <label for="username">Image :</label>
+                                                <input type="file" class="form-control" id="productimage"
+                                                    placeholder="Browse Image">
+                                            </div>
                                             <!-- <div class="form-group">
                                                 <label for="role">Quantity:</label>
                                                 <input type="number" class="form-control" id="productstock"
@@ -523,6 +528,7 @@
                                             <th>Price</th>
                                             <th>Discount</th>
                                             <th>Stock availability</th>
+                                            <th>Image</th>
                                             <th></th>
                                             <th></th>
                                         </tr>
@@ -679,6 +685,15 @@
                 stockCell.textContent = item.stock;
                 row.appendChild(stockCell);
 
+                const imageCell = document.createElement("td");
+                const imageElement = document.createElement("img");
+                imageElement.src = item.images[0];
+                imageElement.alt = "Product Image";
+                imageElement.width = 150;
+                imageElement.height = 150;
+                imageCell.appendChild(imageElement)
+                row.appendChild(imageCell);
+
                 //EDIT BUTTON
                 const buttonCell = document.createElement("td");
                 const editButton = document.createElement("button");
@@ -798,12 +813,23 @@
                 stock: stockValue,
                 // selling_price: sellingValue,
             }
+            let formData = new FormData();
+            formData.append('name', document.getElementById("productname").value);
+            formData.append('category', document.getElementById("categoryDropdown").value);
+            formData.append('warranty', document.getElementById("productwarranty").value);
+            formData.append('price', document.getElementById("productprice").value);
+            formData.append('discount', document.getElementById("productdiscount").value);
+            formData.append('stock', document.getElementById("productstock").value);
+            let imageInput = document.getElementById("productimage");
+            let imageFile = imageInput.files[0]; // Assuming the input is of type 'file'
+
+            // Append the image file to FormData
+            formData.append('file', imageFile);
+
+            // Send the request with FormData
             fetch("http://localhost:5001/product/createProducts", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(body),
+                method: "POST",
+                body: formData
             })
                 .then(response => response.json())
                 .then(data => {
@@ -813,7 +839,7 @@
                         Swal.fire({
                             icon: 'ERROR !',
                             title: 'Please fill ...',
-                            text: "Required fields :" + data.error.missing
+                            text: "Required fields :" + data.errors?.map((item) => item.path)
                         })
                     }
                     else {

@@ -179,8 +179,78 @@ function createBanner() {
             console.error('Error:', error);
         });
 }
+// -------------------------------------------------------------------------
+// get all categories
+var selectedProductid;
+var products = []
+var category_list = []
 
 
+const  clicktype= document.getElementById("clicktype");
+const  roleSelect= document.getElementById("categoryDropdown");
+const  clicklist= document.getElementById("clicklist");
+
+clicktype.addEventListener("change",()=>{
+    const selectedValue=clicktype.value;
+    roleSelect.innerHTML=" "
+    roleSelect.style.display="block"
+    console.log(selectedValue);
+    if (selectedValue==="category") {
+        getCategory()
+        clicklist.textContent="Category"
+    }
+    else if(selectedValue==="product"){
+        getProducts()
+        clicklist.textContent="Products"
+
+    }
+
+})
+
+
+
+function getCategory() {
+
+    fetch('http://localhost:5001/category/categoryAll')
+        .then(response => response.json())
+        .then(data => {
+            category_list = data.data
+            console.log(data);
+            const roleSelect = document.getElementById("categoryDropdown");
+            for (const i of category_list) {
+                const option = document.createElement("option");
+                option.value = i._id;
+                option.textContent = i.categoryName;
+                roleSelect.appendChild(option);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+}
+// ------------------------------------------------------
+
+function getProducts() {
+
+    fetch('http://localhost:5001/product/productsAll')
+        .then(response => response.json())
+        .then(data => {
+            product_list = data.data
+            console.log(data);
+            const roleSelect = document.getElementById("categoryDropdown");
+            for (const i of product_list) {
+                const option = document.createElement("option");
+                option.value = i._id;
+                option.textContent = i.name;
+                roleSelect.appendChild(option);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+}
 
 
 
