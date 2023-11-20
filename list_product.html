@@ -442,11 +442,11 @@
 
                             <button type="button" class="btn btn-primary" onclick="$('#myModal').modal('show')">Add
                                 PRODUCT</button>
-                            <!-- <form id="uploadForm">
+                            <form id="uploadForm">
                                 <input type="file" id="fileInput" name="file">
                                 <button type="submit" class="btn btn-primary" id="upload-file">Upload</button>
                                 <p id="status"></p>
-                            </form> -->
+                            </form>
                         </div>
 
                         <!-- ADD ADMIN MODAL------------------------------------------- -->
@@ -738,6 +738,7 @@
                             })
                                 .then(response => response.json())
                                 .then(data => {
+                                    console.log("Fetch request successful");
                                     console.log(data);
                                     location.reload();
                                 })
@@ -762,33 +763,30 @@
 
         // UPDATE PRODUCT FUNCTION
         function updateProduct() {
-            var nameValue = document.getElementById("productname").value;
-            var categoryValue = document.getElementById("categoryDropdown").value;
-            var warrantyValue = document.getElementById("productwarranty").value;
-            var priceValue = document.getElementById("productprice").value;
-            var discountValue = document.getElementById("productdiscount").value;
-            var stockValue = document.getElementById("productstock").value;
-            let body = {
-                id: selectedProductid,
-                name: nameValue,
-                category: categoryValue,
-                warranty: warrantyValue,
-                price: priceValue,
-                discount: discountValue,
-                stock: stockValue
-            }
+            let formData = new FormData();
+            formData.append('name', document.getElementById("productname").value);
+            formData.append('category', document.getElementById("categoryDropdown").value);
+            formData.append('warranty', document.getElementById("productwarranty").value);
+            formData.append('price', document.getElementById("productprice").value);
+            formData.append('discount', document.getElementById("productdiscount").value);
+            formData.append('stock', document.getElementById("productstock").value);
+            let imageInput = document.getElementById("productimage");
+            let imageFile = imageInput.files[0]; // Assuming the input is of type 'file'
+
+            // Append the image file to FormData
+            formData.append('file', imageFile);
             fetch("http://localhost:5001/product/UpdateProducts", {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(body),
+                body: formData,
             })
                 .then(response => response.json())
                 .then(data => {
                     selectedProductid = ""
                     console.log("messs", data);
-                    location.reload()
+                    // location.reload()
                 })
                 .catch(error => {
                     console.error('Error:', error);
@@ -797,22 +795,6 @@
 
         // FUNCTION CREATE
         function createProduct() {
-            var nameValue = document.getElementById("productname").value;
-            var categoryValue = document.getElementById("categoryDropdown").value;
-            var warrantyValue = document.getElementById("productwarranty").value;
-            var priceValue = document.getElementById("productprice").value;
-            var discountValue = document.getElementById("productdiscount").value;
-            var stockValue = document.getElementById("productstock").value;
-            // var sellingValue = document.getElementById("productselling").value;
-            let body = {
-                name: nameValue,
-                category: categoryValue,
-                warranty: warrantyValue,
-                price: priceValue,
-                discount: discountValue,
-                stock: stockValue,
-                // selling_price: sellingValue,
-            }
             let formData = new FormData();
             formData.append('name', document.getElementById("productname").value);
             formData.append('category', document.getElementById("categoryDropdown").value);
@@ -860,7 +842,7 @@
             var formData = new FormData();
             var fileInput = document.getElementById('fileInput').files[0];
             formData.append('file', fileInput);
-            fetch('http://localhost:5001/product/upload-products', {
+            fetch('http://localhost:5001/product/UpdateProducts', {
                 method: 'POST',
                 body: formData
             })

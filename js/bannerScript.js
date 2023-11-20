@@ -51,6 +51,8 @@ function setBanner() {
             selecteBannerid = item._id
             document.getElementById("bannername").value = item.bannerTitle
             document.getElementById("bannerdescription").value = item.description
+            document.getElementById("clicktype").value = item.clickType
+            document.getElementById("categoryDropdown").value = item.relatedItemId
             // document.getElementById("bannerimage").value = item.bannerImage
             console.log("BANNER UPDATE BUTTON clicked");
             $('#myModal').modal('show')
@@ -110,6 +112,10 @@ function updateBanner() {
     let formData = new FormData();
     formData.append('bannerTitle', document.getElementById("bannername").value);
     formData.append('description', document.getElementById("bannerdescription").value);
+    formData.append('bannerimage', document.getElementById("bannerimage").value);
+    formData.append('clickType', document.getElementById("clicktype").value);
+    formData.append('relatedItemId', document.getElementById("clicktype").value);
+
 
     // Get the image file from the input element
     let imageInput = document.getElementById("bannerimage");
@@ -137,14 +143,20 @@ function updateBanner() {
 
 // create BANNER
 function createBanner() {
-    let body = {
-        bannerTitle: document.getElementById("bannername").value,
-        description: document.getElementById("bannerdescription").value,
-    }
-    console.log(body);
+    // let body = {
+    //     bannerTitle: document.getElementById("bannername").value,
+    //     description: document.getElementById("bannerdescription").value,
+    //     bannerimage: document.getElementById("bannerimage").value,
+    //     bannerClicktype: document.getElementById("clicktype").value,
+    // }
     let formData = new FormData();
     formData.append('bannerTitle', document.getElementById("bannername").value);
     formData.append('description', document.getElementById("bannerdescription").value);
+    formData.append('relatedItemId', document.getElementById("categoryDropdown").value);
+    formData.append('clickType', document.getElementById("clicktype").value);
+
+    console.log(formData);
+
 
     let imageInput = document.getElementById("bannerimage");
     let imageFile = imageInput.files[0];
@@ -186,22 +198,22 @@ var products = []
 var category_list = []
 
 
-const  clicktype= document.getElementById("clicktype");
-const  roleSelect= document.getElementById("categoryDropdown");
-const  clicklist= document.getElementById("clicklist");
+const clicktype = document.getElementById("clicktype");
+const roleSelect = document.getElementById("categoryDropdown");
+const clicklist = document.getElementById("clicklist");
 
-clicktype.addEventListener("change",()=>{
-    const selectedValue=clicktype.value;
-    roleSelect.innerHTML=" "
-    roleSelect.style.display="block"
+clicktype.addEventListener("change", () => {
+    const selectedValue = clicktype.value;
+    roleSelect.innerHTML = " "
+    roleSelect.style.display = "block"
     console.log(selectedValue);
-    if (selectedValue==="category") {
+    if (selectedValue === "category") {
         getCategory()
-        clicklist.textContent="Category"
+        clicklist.textContent = "Category"
     }
-    else if(selectedValue==="product"){
+    else if (selectedValue === "product") {
         getProducts()
-        clicklist.textContent="Products"
+        clicklist.textContent = "Products"
 
     }
 
@@ -251,6 +263,7 @@ function getProducts() {
         });
 
 }
+// clicktype
 
 
 
