@@ -49,6 +49,7 @@ function setBanner() {
         editButton.textContent = "EDIT";
         editButton.addEventListener("click", function () {
             selecteBannerid = item._id
+            document.querySelector(".modal-title").innerHTML = "Update banner"
             document.getElementById("bannername").value = item.bannerTitle
             document.getElementById("bannerdescription").value = item.description
             document.getElementById("clicktype").value = item.clickType
@@ -117,12 +118,15 @@ function updateBanner() {
     formData.append('relatedItemId', document.getElementById("clicktype").value);
 
 
+    // const bannerIdDisplay = document.getElementById("bannerIdDisplay");
+    // bannerIdDisplay.innerText = `Selected Banner ID: ${selecteBannerid}`
+
     // Get the image file from the input element
     let imageInput = document.getElementById("bannerimage");
     let imageFile = imageInput.files[0]; // Assuming the input is of type 'file'
 
     // Append the image file to FormData
-    formData.append('bannerImage', imageFile);
+    formData.append('file', imageFile);
 
     fetch("http://localhost:5001/banner/updateBanner/" + selecteBannerid, {
         method: 'PUT',

@@ -442,11 +442,11 @@
 
                             <button type="button" class="btn btn-primary" onclick="$('#myModal').modal('show')">Add
                                 PRODUCT</button>
-                            <form id="uploadForm">
+                            <!-- <form id="uploadForm">
                                 <input type="file" id="fileInput" name="file">
                                 <button type="submit" class="btn btn-primary" id="upload-file">Upload</button>
                                 <p id="status"></p>
-                            </form>
+                            </form> -->
                         </div>
 
                         <!-- ADD ADMIN MODAL------------------------------------------- -->
@@ -497,6 +497,7 @@
                                                 <input type="file" class="form-control" id="productimage"
                                                     placeholder="Browse Image">
                                             </div>
+                                            <img id="showimge" alt="">
                                             <!-- <div class="form-group">
                                                 <label for="role">Quantity:</label>
                                                 <input type="number" class="form-control" id="productstock"
@@ -771,22 +772,22 @@
             formData.append('discount', document.getElementById("productdiscount").value);
             formData.append('stock', document.getElementById("productstock").value);
             let imageInput = document.getElementById("productimage");
-            let imageFile = imageInput.files[0]; // Assuming the input is of type 'file'
 
-            // Append the image file to FormData
+            let imageFile = imageInput?.files[0]; // Assuming the input is of type 'file'
+            console.log("youuuuuusuusufsfhdfhs")
+            console.log("imageFile",imageInput, imageFile)
             formData.append('file', imageFile);
-            fetch("http://localhost:5001/product/UpdateProducts", {
+            // Append the image file to FormData
+
+            fetch("http://localhost:5001/product/UpdateProducts/" + selectedProductid, {
                 method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+
                 body: formData,
             })
                 .then(response => response.json())
                 .then(data => {
                     selectedProductid = ""
                     console.log("messs", data);
-                    // location.reload()
                 })
                 .catch(error => {
                     console.error('Error:', error);
