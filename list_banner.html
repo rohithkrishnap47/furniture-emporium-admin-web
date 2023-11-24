@@ -493,9 +493,10 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="username">Image :</label>
-                                                <input type="file" class="form-control" id="bannerimage"
+                                                <input onchange="addBannerImage()" type="file" class="form-control" id="bannerimage"
                                                     placeholder="Browse Image">
                                             </div>
+                                            <img id="selectedImage" style="max-width: 100%; max-height: 200px; margin-top: 10px;" />
                                             <div class="form-group">
                                                 <label for="role">Click Type:</label>
                                                 <select class="form-control" id="clicktype" name="role">

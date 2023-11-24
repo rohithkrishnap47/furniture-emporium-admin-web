@@ -128,7 +128,7 @@ function updateBanner() {
     // Append the image file to FormData
     formData.append('file', imageFile);
 
-    fetch("http://localhost:5001/banner/updateBanner/" + selecteBannerid, {
+    fetch("http://localhost:5001/banner/updateBanner/"+selecteBannerid, {
         method: 'PUT',
         body: formData // Set the FormData object as the body
     })
@@ -136,7 +136,7 @@ function updateBanner() {
         .then(data => {
             selecteBannerid = ""
             console.log(data);
-            // location.reload()
+            location.reload()
         })
         .catch(error => {
             console.error('Error:', error);
@@ -268,6 +268,33 @@ function getProducts() {
 
 }
 // clicktype
+
+// ---------------------------------------------------
+function addBannerImage() {
+    let imageInput = document.getElementById("productimage");
+    const input = document.getElementById('bannerimage');
+    const selectedImage = document.getElementById('selectedImage');
+
+    // Check if any file is selected
+    if (input.files && input.files.length > 0) {
+        // Assuming you only want to display the first selected image
+        const file = input.files[0];
+
+        // Create a FileReader to read the image
+        const reader = new FileReader();
+
+        // Set the callback for when the image is loaded
+        reader.onload = function (e) {
+            selectedImage.src = e.target.result;
+        };
+
+        // Read the image as a data URL
+        reader.readAsDataURL(file);
+    } else {
+        // No file selected, clear the displayed image
+        selectedImage.src = '';
+    }
+}
 
 
 
