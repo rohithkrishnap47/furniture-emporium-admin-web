@@ -267,9 +267,9 @@ function getProducts() {
         });
 
 }
-// clicktype
 
-// ---------------------------------------------------
+
+// --------------------SHOW SELECTED IMAGE-------------------------------
 function addBannerImage() {
     let imageInput = document.getElementById("productimage");
     const input = document.getElementById('bannerimage');
@@ -295,6 +295,40 @@ function addBannerImage() {
         selectedImage.src = '';
     }
 }
+// -------------------CROPPER.JS---------------------------------------
+let cropper;
+
+  function handleImageUpload() {
+    const input = document.getElementById('productimage');
+    const selectedImage = document.getElementById('selectedImage');
+    const file = input.files[0];
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      selectedImage.src = e.target.result;
+
+      // Initialize cropper
+      cropper = new Cropper(selectedImage, {
+        aspectRatio: 1, // Set your desired aspect ratio
+        viewMode: 2, // Set the crop box to cover the entire canvas
+      });
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function cropImage() {
+    console.log("crop button clicked");
+    // Get the cropped data
+    const croppedCanvas = cropper.getCroppedCanvas();
+    const croppedDataUrl = croppedCanvas.toDataURL('image/jpeg'); // Adjust the format as needed
+
+    // Display the cropped image
+    const croppedImage = document.createElement('img');
+    croppedImage.src = croppedDataUrl;
+
+    // Add the cropped image to the page or send it to the server as needed
+    document.body.appendChild(croppedImage);
+  }
 
 
 
