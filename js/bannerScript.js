@@ -307,10 +307,10 @@ let cropper;
     reader.onload = function (e) {
       selectedImage.src = e.target.result;
 
-      // Initialize cropper
+
       cropper = new Cropper(selectedImage, {
-        aspectRatio: 1, // Set your desired aspect ratio
-        viewMode: 2, // Set the crop box to cover the entire canvas
+        aspectRatio: 1, 
+        viewMode: 2,
       });
     };
     reader.readAsDataURL(file);
