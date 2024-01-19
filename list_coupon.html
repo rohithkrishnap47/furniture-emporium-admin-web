@@ -478,7 +478,7 @@
                                 <button type="button" class="btn btn-outline-primary"
                                     onclick="$('#myModal').modal('show')">ADD COUPON</button>
                             </div>
-    
+
                             <!-- ADD Category MODAL------------------------------------------- -->
                             <div class="modal fade" id="myModal">
                                 <div class="modal-dialog">
@@ -488,153 +488,133 @@
                                             <h4 class="modal-title">Coupon</h4>
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                                         </div>
-    
+
                                         <div class="modal-body">
-    
+
                                             <form>
                                                 <div class="form-group">
-                                                    <label for="Your Category">Banner Title:</label>
+                                                    <label for="Your Category">Coupon name</label>
                                                     <input type="text" class="form-control" id="bannername"
-                                                        placeholder="Enter Title">
+                                                        placeholder="eg:COUPON50">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="username">Description:</label>
                                                     <input type="text" class="form-control" id="bannerdescription"
-                                                        placeholder="Banner Description">
+                                                        placeholder="Coupon Description">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="username">Image :</label>
-                                                    <input onchange="addBannerImage()" type="file" class="form-control"
-                                                        id="bannerimage" placeholder="Browse Image">
+                                                    <label for="username">Discount Amount:</label>
+                                                    <input type="number" class="form-control" id="bannerdescription"
+                                                        placeholder=" ">
                                                 </div>
-                                                <img id="selectedImage"
-                                                    style="max-width: 100%; max-height: 200px; margin-top: 10px;" />
-                                                <!-- cropper.js CODE--------------------------- -->
-                                                <!-- Button to trigger cropping -->
-                                                <button onclick="cropImage()" class="btn btn-primary">Crop Image</button>
-    
-                                                <!-- Hidden canvas for cropping -->
-                                                <canvas id="croppedCanvas" style="display: none;"></canvas>
-                                                <!-- ------------------------------------------ -->
                                                 <div class="form-group">
-                                                    <label for="role">Click Type:</label>
-                                                    <select class="form-control" id="clicktype" name="role">
-                                                        <option value="" disabled selected>Select Click Type</option>
-                                                        <option value="category">Category</option>
-                                                        <option value="product">Product</option>
-                                                    </select>
+                                                    <label for="username">Expiry:</label>
+                                                    <input type="date" class="form-control" id="bannerdescription"
+                                                        placeholder="Coupon Description">
                                                 </div>
-                                                <div class="form-group ">
-                                                    <label for="username" id="clicklist"></label>
-                                                    <select class="form-control" id="categoryDropdown"
-                                                        style="display: none;">
-                                                    </select>
-                                                </div>
-    
-    
                                             </form>
                                         </div>
-    
+
                                         <!-- Modal footer -->
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Close</button>
                                             <button id="bannerIdDisplay" type="button" class="btn btn-primary"
-                                                onclick="selecteBannerid?updateBanner():createBanner() ">COU</button>
-    
+                                                onclick="selecteBannerid?updateBanner():createBanner() ">OK</button>
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>USER ID</th>
-                                            <th>Name</th>
-                                            <th>Username</th>
-                                            <th>Email Verified</th>
-                                            <!-- <th>Status</th> -->
-                                            <!-- <th></th> -->
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="data-body"></tbody>
-                                </table>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>No.</th>
+                                                <th>Coupon Name</th>
+                                                <th>Discount Amount</th>
+                                                <th>Expiry</th>
+                                                <!-- <th>Status</th> -->
+                                                <!-- <th></th> -->
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="data-body"></tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
+
                     </div>
+                    <!-- /.container-fluid -->
 
                 </div>
-                <!-- /.container-fluid -->
+
+                <!-- End of Main Content -->
+
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright &copy; Furniture Emporium 2023</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
 
             </div>
-
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Furniture Emporium 2023</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
+            <!-- End of Content Wrapper -->
 
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Page Wrapper -->
 
-    </div>
-    <!-- End of Page Wrapper -->
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="login.html">Logout</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Bootstrap core JavaScript-->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="js/sb-admin-2.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+        <!-- Page level plugins -->
+        <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+        <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="js/demo/datatables-demo.js"></script>
+        <!-- Page level custom scripts -->
+        <script src="js/demo/datatables-demo.js"></script>
 
-    <!-- SWEET ALERT CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- bannerScript -->
-    <script src="./js/userScript.js"></script>
+        <!-- SWEET ALERT CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- bannerScript -->
+        <script src="./js/coupon.js"></script>
 
 
 
