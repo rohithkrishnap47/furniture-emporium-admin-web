@@ -1,5 +1,3 @@
-// // -----------------------------------------------------
-// http://localhost:5001/auth/login
 
 var selectuserid;
 var user = []
@@ -42,17 +40,17 @@ function setUser() {
         // DELETE BUTTON
         const buttCell = document.createElement("td");
         const deleteButton = document.createElement("button");
-        deleteButton.classList.add("btn", "btn-danger");
-        deleteButton.textContent = "DELETE";
+        deleteButton.classList.add("btn", "btn-info");
+        deleteButton.textContent = "BLOCK";
         deleteButton.addEventListener("click", function () {
             Swal.fire({
                 title: 'You Sure?',
-                text: "This user will be permanently deleted !",
+                text: "This user will be BLOCKED !",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#1CC88A',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
+                confirmButtonText: 'YES'
             }).then((result) => {
                 if (result.isConfirmed) {
                     fetch("http://localhost:5001/user/userDelete/" + item._id, {

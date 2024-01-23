@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>USER List</title>
+    <title>Coupon</title>
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -375,7 +375,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">USER DETAILS</h1>
+                    <h1 class="h3 mb-2 text-gray-800">COUPONS LIST</h1>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -408,22 +408,27 @@
                                             <form>
                                                 <div class="form-group">
                                                     <label for="Your Category">Coupon name</label>
-                                                    <input type="text" class="form-control" id="bannername"
+                                                    <input type="text" class="form-control" id="couponname"
                                                         placeholder="eg:COUPON50">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="username">Description:</label>
-                                                    <input type="text" class="form-control" id="bannerdescription"
+                                                    <input type="text" class="form-control" id="coupondescription"
                                                         placeholder="Coupon Description">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="username">Discount Amount:</label>
-                                                    <input type="number" class="form-control" id="bannerdescription"
+                                                    <input type="number" class="form-control" id="couponamount"
                                                         placeholder=" ">
                                                 </div>
                                                 <div class="form-group">
+                                                    <label for="username">Starting:</label>
+                                                    <input type="date" class="form-control" id="couponstartdate"
+                                                        placeholder="Coupon Description">
+                                                </div>
+                                                <div class="form-group">
                                                     <label for="username">Expiry:</label>
-                                                    <input type="date" class="form-control" id="bannerdescription"
+                                                    <input type="date" class="form-control" id="couponExpiry"
                                                         placeholder="Coupon Description">
                                                 </div>
                                             </form>
@@ -434,7 +439,7 @@
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Close</button>
                                             <button id="bannerIdDisplay" type="button" class="btn btn-primary"
-                                                onclick="selecteBannerid?updateBanner():createBanner() ">OK</button>
+                                                onclick="selecteBannerid?updateBanner():createCoupon() ">OK</button>
 
                                         </div>
                                     </div>
@@ -447,6 +452,7 @@
                                             <tr>
                                                 <th>No.</th>
                                                 <th>Coupon Name</th>
+                                                <th>Description</th>
                                                 <th>Discount Amount</th>
                                                 <th>Expiry</th>
                                                 <!-- <th>Status</th> -->
