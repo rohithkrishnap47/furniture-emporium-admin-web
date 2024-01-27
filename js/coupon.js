@@ -1,14 +1,17 @@
 
-var selecteBannerid=0;
+var selecteBannerid = 0;
 var user = []
-displayuser()
-function displayuser() {
+displayCoupon()
+function displayCoupon() {
     fetch("http://localhost:5001/admin/getALLcoupon")
+
         .then(response => response.json())
         .then(data => {
-            user = data.data
-                console.log("cou-data",data.data);
+            
+            user = data.coupons;
+            console.log(user);
             setUser()
+
         })
         .catch(error => {
             console.error("the error is:", error);
@@ -16,15 +19,15 @@ function displayuser() {
 }
 function setUser() {
     const tbody = document.getElementById("data-body");
-    user?.forEach(item => {
+    user.forEach(item => {
         const row = document.createElement("tr");
 
         const idCell = document.createElement("td");
         idCell.textContent = user.indexOf(item) + 1;
-        row.appendChild(idCell);
+        row.appendChild(idCell) ;
 
         const userCell = document.createElement("td");
-        userCell.textContent = item.code;        ;
+        userCell.textContent = item.code;;
         row.appendChild(userCell);
 
         const emailCell = document.createElement("td");
@@ -123,11 +126,11 @@ function updateBanner() {
 // create BANNER
 function createCoupon() {
     let body = {
-        code:document.getElementById("couponname").value,
-        description:document.getElementById("coupondescription").value,
-        discount:document.getElementById("couponamount").value,
-        validFrom:document.getElementById("couponstartdate").value,
-        validTo:document.getElementById("couponExpiry").value,
+        code: document.getElementById("couponname").value,
+        description: document.getElementById("coupondescription").value,
+        discount: document.getElementById("couponamount").value,
+        validFrom: document.getElementById("couponstartdate").value,
+        validTo: document.getElementById("couponExpiry").value,
     }
     console.log(body);
     fetch("http://localhost:5001/admin/create-coupon", {
@@ -138,14 +141,14 @@ function createCoupon() {
         body: JSON.stringify(body)
     })
         .then(response => response.json())
-        .then(data => {
+        ``.then(data => {
             banner = data.data
             console.log(data);
             if (data.statusCode === 400) {
                 Swal.fire({
                     icon: 'ERROR !',
                     title: 'Please fill ...',
-                    text: "Required fields :"+data.error.missing
+                    text: "Required fields :" + data.error.missing
                 })
             }
             else {
@@ -156,8 +159,3 @@ function createCoupon() {
             console.error('Error:', error);
         });
 }
-
-
-
-
-

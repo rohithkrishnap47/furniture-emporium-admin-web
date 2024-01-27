@@ -615,6 +615,7 @@
                 .then(data => {
                     products = data.data
                     console.log(data);
+                    console.log("cou-data", data.data);
                     setData()
                 })
                 .catch(error => {
@@ -639,10 +640,6 @@
                 const categoryCell = document.createElement("td");
                 categoryCell.textContent = item.category;
                 row.appendChild(categoryCell);
-
-                // const descriptionCell = document.createElement("td");
-                // descriptionCell.textContent = item.description;
-                // row.appendChild(descriptionCell);
 
                 const warrantyCell = document.createElement("td");
                 warrantyCell.textContent = item.warranty;
