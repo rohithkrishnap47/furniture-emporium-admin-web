@@ -63,7 +63,7 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>ADMIN</span></a>
             </li>
-             
+
             <li class="nav-item active">
                 <a class="nav-link" href="list_order.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -221,12 +221,12 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
- 
+
 
                         <!-- Nav Item - Alerts -->
- 
+
                         <!-- Nav Item - Messages -->
- 
+
 
                         <div class="topbar-divider d-none d-sm-block"></div>
 
@@ -351,7 +351,7 @@
                                         <button type="button" class="btn btn-secondary"
                                             data-dismiss="modal">Close</button>
                                         <button type="button" class="btn btn-primary"
-                                            onclick="selectedProductid?updateProduct(): createProduct()">Save</button>
+                                            onclick="saveAndCloseModal()">Save</button>
                                     </div>
                                 </div>
                             </div>
@@ -596,7 +596,16 @@
                 tbody.appendChild(row);
             });
         }
+        // ----------------------------------------------------------
+        // Function to save the data and close the modal
+        function saveAndCloseModal() {
+            // Call the function to save or update the product
+            selectedProductid ? updateProduct() : createProduct();
 
+            // Close the modal
+            $('#myModal').modal('hide');
+        }
+        // ----------------------------------------------------------
 
         // UPDATE PRODUCT FUNCTION
         function updateProduct() {
@@ -608,12 +617,9 @@
             formData.append('discount', document.getElementById("productdiscount").value);
             formData.append('stock', document.getElementById("productstock").value);
             let imageInput = document.getElementById("productimage");
-
             let imageFile = imageInput?.files[0]; // Assuming the input is of type 'file'
-            console.log("hihiiii")
-            console.log("imageFile:", imageInput, imageFile)
-            formData.append('file', imageFile);
-            // Append the image file to FormData
+
+            formData.append('file', imageFile); // Append the image file to FormData
 
             fetch("http://localhost:5001/product/UpdateProducts/" + selectedProductid, {
                 method: 'PUT',
@@ -621,16 +627,20 @@
             })
                 .then(response => response.json())
                 .then(data => {
-                    selectedProductid = ""
+                    selectedProductid = "";
                     console.log("messs", data);
+                    // Reload the window upon successful update
+                    window.location.reload();
                 })
                 .catch(error => {
                     console.error('Error:', error);
                 });
         }
 
+
         // FUNCTION CREATE
         function createProduct() {
+            event.preventDefault()
             let formData = new FormData();
             formData.append('name', document.getElementById("productname").value);
             formData.append('category', document.getElementById("categoryDropdown").value);
