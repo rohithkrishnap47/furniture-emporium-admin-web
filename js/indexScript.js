@@ -1,3 +1,74 @@
+var user = []
+displayuser()
+var products = []
+getProducts()
+var orders = []
+totalorders()
+
+// USERS-COUNT
+function displayuser() {
+    fetch("http://localhost:5001/user/listusers")
+        .then(response => response.json())
+        .then(data => {
+            user = data.data
+            console.log("deiiiii", data.data);
+            displayUserCount()
+        })
+        .catch(error => {
+            console.error("the error is:", error);
+        });
+}
+function displayUserCount() {
+    console.log("User count:", user.length);
+    document.querySelector('.total-users').textContent = user.length;
+}
+// PRODUCTS-COUNT
+function getProducts() {
+    fetch('http://localhost:5001/product/productsAll')
+        .then(response => response.json())
+        .then(data => {
+            products = data.data;
+            console.log("products", data.data);
+            getProductCount();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
+function getProductCount() {
+    const productCount = products.length;
+    console.log("Number of products:", productCount);
+    document.querySelector('.total-products').textContent = products.length;
+}
+// ORDERS-COUNT
+
+function totalorders() {
+    fetch("http://localhost:5001/user/show-orders")
+        .then(response => response.json())
+        .then(data => {
+            orders = data;
+            console.log(orders);
+            updateTotalOrders();
+        })
+        .catch(error => {
+            console.error("the error is:", error);
+        });
+}
+// COUNT & progress-bar (DYNAMIC BAR)
+function updateTotalOrders() {
+    const totalOrdersElement = document.querySelector('.total-orders');
+    const progressBar = document.querySelector('.progress-bar');
+
+    if (totalOrdersElement && progressBar) {
+        const totalOrdersCount = orders.length;
+        totalOrdersElement.textContent = totalOrdersCount;
+
+        const progressBarWidth = (totalOrdersCount / 10) * 100; // assuming max width is 100%
+        progressBar.style.width = progressBarWidth + '%';
+        progressBar.setAttribute('aria-valuenow', progressBarWidth);
+    }
+}
 // -------------------------------------------------
 // Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
