@@ -30,20 +30,20 @@ function setUser() {
         userCell.textContent = item.code;;
         row.appendChild(userCell);
 
-        const emailCell = document.createElement("td");
-        emailCell.textContent = item.description;
-        row.appendChild(emailCell);
+        // const emailCell = document.createElement("td");
+        // emailCell.textContent = item.description;
+        // row.appendChild(emailCell);
 
         const statusCell = document.createElement("td");
         statusCell.textContent = item.discount;
         row.appendChild(statusCell);
 
         const expiryCell = document.createElement("td");
-        expiryCell.textContent = item.validFrom;
+        expiryCell.textContent = item.validFrom.slice(0, 10);
         row.appendChild(expiryCell);
 
         const validity = document.createElement("td");
-        validity.textContent = item.validTo;
+        validity.textContent = item.validTo.slice(0, 10);
         row.appendChild(validity);
 
 
@@ -51,12 +51,12 @@ function setUser() {
         // DELETE BUTTON
         const buttCell = document.createElement("td");
         const deleteButton = document.createElement("button");
-        deleteButton.classList.add("btn", "btn-info");
-        deleteButton.textContent = "BLOCK";
+        deleteButton.classList.add("btn", "btn-danger");
+        deleteButton.textContent = "DELETE";
         deleteButton.addEventListener("click", function () {
             Swal.fire({
                 title: 'You Sure?',
-                text: "This user will be BLOCKED !",
+                text: "This Coupon will be DELETED !",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#1CC88A',
@@ -64,7 +64,7 @@ function setUser() {
                 confirmButtonText: 'YES'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    fetch("http://localhost:5001/user/userDelete/" + item._id, {
+                    fetch("http://localhost:5001/admin/delete-coupon/" + item._id, {
                         method: 'DELETE',
                         headers: {
                             'Content-Type': 'application/json',
@@ -123,7 +123,7 @@ function updateBanner() {
 
 // -----------------------------------------------------
 
-// create BANNER
+// create COUPON
 function createCoupon() {
     let body = {
         code: document.getElementById("couponname").value,
