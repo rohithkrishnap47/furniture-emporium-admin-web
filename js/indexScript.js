@@ -3,7 +3,29 @@ displayuser()
 var products = []
 getProducts()
 var orders = []
+console.log("orders", orders,length);
 totalorders()
+// COUPONS-COUNT
+var coupo = []
+displayCoupon()
+function displayCoupon() {
+    fetch("http://localhost:5001/admin/getALLcoupon")
+
+        .then(response => response.json())
+        .then(data => {
+            
+            coupo = data.coupons;
+            console.log(coupo);
+            displaycouponCount()
+        })
+        .catch(error => {
+            console.error("the error is:", error);
+        });
+}
+function displaycouponCount() {
+    console.log("Coupon count:", coupo.length);
+    document.querySelector('.total-coupons').textContent = coupo.length;
+}
 
 // USERS-COUNT
 function displayuser() {
@@ -13,6 +35,7 @@ function displayuser() {
             user = data.data
             console.log("deiiiii", data.data);
             displayUserCount()
+            updateChart()
         })
         .catch(error => {
             console.error("the error is:", error);
@@ -50,6 +73,7 @@ function totalorders() {
             orders = data;
             console.log(orders);
             updateTotalOrders();
+            updateChartWithData(orders); //chart.js
         })
         .catch(error => {
             console.error("the error is:", error);
@@ -64,11 +88,47 @@ function updateTotalOrders() {
         const totalOrdersCount = orders.length;
         totalOrdersElement.textContent = totalOrdersCount;
 
-        const progressBarWidth = (totalOrdersCount / 10) * 100; // assuming max width is 100%
+        const progressBarWidth = (totalOrdersCount / 20) * 100; // assuming max width is 100%
         progressBar.style.width = progressBarWidth + '%';
         progressBar.setAttribute('aria-valuenow', progressBarWidth);
     }
 }
+// CHART-js ORDERS INTEGRATION
+
+// Define chart data and options
+const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+const chartData = {
+    labels: labels,
+    datasets: [{
+        label: 'My First Dataset',
+        data: [65, 59, 80, 81, 56, 55, 40],
+        fill: false,
+        borderColor: 'rgb(75, 192, 192)',
+        tension: 0.1
+    }]
+};
+
+// Get the canvas element
+const ctt = document.getElementById('myAreaChart').getContext('2d');
+
+// Initialize the chart
+const myChart = new Chart(ctt, {
+    type: 'line',
+    data: chartData
+});
+
+// Function to update chart data
+function updateChart() {
+    // Update chart data with user data
+    myChart.data.datasets[0].data = user.slice(0, 7); // Assuming you want to show data for the first 7 months
+    myChart.update(); // Update the chart
+}
+
+
+
+
+
+
 // -------------------------------------------------
 // Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
@@ -100,94 +160,94 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 }
 
 // Area Chart Example
-var ctx = document.getElementById("myAreaChart");
-var myLineChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        datasets: [{
-            label: "Earnings",
-            lineTension: 0.3,
-            backgroundColor: "rgba(78, 115, 223, 0.05)",
-            borderColor: "rgba(78, 115, 223, 1)",
-            pointRadius: 3,
-            pointBackgroundColor: "rgba(78, 115, 223, 1)",
-            pointBorderColor: "rgba(78, 115, 223, 1)",
-            pointHoverRadius: 3,
-            pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-            pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-            pointHitRadius: 10,
-            pointBorderWidth: 2,
-            data: [0, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000],
-        }],
-    },
-    options: {
-        maintainAspectRatio: false,
-        layout: {
-            padding: {
-                left: 10,
-                right: 25,
-                top: 25,
-                bottom: 0
-            }
-        },
-        scales: {
-            xAxes: [{
-                time: {
-                    unit: 'date'
-                },
-                gridLines: {
-                    display: false,
-                    drawBorder: false
-                },
-                ticks: {
-                    maxTicksLimit: 7
-                }
-            }],
-            yAxes: [{
-                ticks: {
-                    maxTicksLimit: 5,
-                    padding: 10,
-                    // Include a dollar sign in the ticks
-                    callback: function (value, index, values) {
-                        return '$' + number_format(value);
-                    }
-                },
-                gridLines: {
-                    color: "rgb(234, 236, 244)",
-                    zeroLineColor: "rgb(234, 236, 244)",
-                    drawBorder: false,
-                    borderDash: [2],
-                    zeroLineBorderDash: [2]
-                }
-            }],
-        },
-        legend: {
-            display: false
-        },
-        tooltips: {
-            backgroundColor: "rgb(255,255,255)",
-            bodyFontColor: "#858796",
-            titleMarginBottom: 10,
-            titleFontColor: '#6e707e',
-            titleFontSize: 14,
-            borderColor: '#dddfeb',
-            borderWidth: 1,
-            xPadding: 15,
-            yPadding: 15,
-            displayColors: false,
-            intersect: false,
-            mode: 'index',
-            caretPadding: 10,
-            callbacks: {
-                label: function (tooltipItem, chart) {
-                    var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-                    return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
-                }
-            }
-        }
-    }
-});
+// var ctx = document.getElementById("myAreaChart");
+// var myLineChart = new Chart(ctx, {
+//     type: 'line',
+//     data: {
+//         labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+//         datasets: [{
+//             label: "Earnings",
+//             lineTension: 0.3,
+//             backgroundColor: "rgba(78, 115, 223, 0.05)",
+//             borderColor: "rgba(78, 115, 223, 1)",
+//             pointRadius: 3,
+//             pointBackgroundColor: "rgba(78, 115, 223, 1)",
+//             pointBorderColor: "rgba(78, 115, 223, 1)",
+//             pointHoverRadius: 3,
+//             pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+//             pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+//             pointHitRadius: 10,
+//             pointBorderWidth: 2,
+//             data: [0, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000],
+//         }],
+//     },
+//     options: {
+//         maintainAspectRatio: false,
+//         layout: {
+//             padding: {
+//                 left: 10,
+//                 right: 25,
+//                 top: 25,
+//                 bottom: 0
+//             }
+//         },
+//         scales: {
+//             xAxes: [{
+//                 time: {
+//                     unit: 'date'
+//                 },
+//                 gridLines: {
+//                     display: false,
+//                     drawBorder: false
+//                 },
+//                 ticks: {
+//                     maxTicksLimit: 7
+//                 }
+//             }],
+//             yAxes: [{
+//                 ticks: {
+//                     maxTicksLimit: 5,
+//                     padding: 10,
+//                     // Include a dollar sign in the ticks
+//                     callback: function (value, index, values) {
+//                         return '$' + number_format(value);
+//                     }
+//                 },
+//                 gridLines: {
+//                     color: "rgb(234, 236, 244)",
+//                     zeroLineColor: "rgb(234, 236, 244)",
+//                     drawBorder: false,
+//                     borderDash: [2],
+//                     zeroLineBorderDash: [2]
+//                 }
+//             }],
+//         },
+//         legend: {
+//             display: false
+//         },
+//         tooltips: {
+//             backgroundColor: "rgb(255,255,255)",
+//             bodyFontColor: "#858796",
+//             titleMarginBottom: 10,
+//             titleFontColor: '#6e707e',
+//             titleFontSize: 14,
+//             borderColor: '#dddfeb',
+//             borderWidth: 1,
+//             xPadding: 15,
+//             yPadding: 15,
+//             displayColors: false,
+//             intersect: false,
+//             mode: 'index',
+//             caretPadding: 10,
+//             callbacks: {
+//                 label: function (tooltipItem, chart) {
+//                     var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+//                     return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+//                 }
+//             }
+//         }
+//     }
+// });
 // =====================================================================================
 var ctx = document.getElementById("myPieChart");
 var myPieChart = new Chart(ctx, {
