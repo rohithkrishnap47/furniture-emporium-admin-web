@@ -29,7 +29,7 @@ function showOrders() {
         row.appendChild(productCell);
 
         const payMtdCell = document.createElement("td");
-        payMtdCell.textContent = item.paymentMethod;
+        payMtdCell.textContent = item.PaymentMethod;
         row.appendChild(payMtdCell);
 
         const statusCell = document.createElement("td");
