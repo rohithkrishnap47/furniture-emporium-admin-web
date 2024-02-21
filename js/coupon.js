@@ -7,7 +7,7 @@ function displayCoupon() {
 
         .then(response => response.json())
         .then(data => {
-            
+
             user = data.coupons;
             console.log(user);
             setUser()
@@ -24,7 +24,7 @@ function setUser() {
 
         const idCell = document.createElement("td");
         idCell.textContent = user.indexOf(item) + 1;
-        row.appendChild(idCell) ;
+        row.appendChild(idCell);
 
         const userCell = document.createElement("td");
         userCell.textContent = item.code;;
@@ -159,3 +159,27 @@ function createCoupon() {
             console.error('Error:', error);
         });
 }
+
+// -----------------------------------------------------------------------------------------------
+// ADMIN-INFO
+document.addEventListener("DOMContentLoaded", function () {
+    var adminInfo = localStorage.getItem("admin-Info");
+
+    if (adminInfo) {
+        var adminData = JSON.parse(adminInfo);
+
+        var adminNameElement = document.getElementById("adminName");
+        if (adminNameElement) {
+            adminNameElement.textContent = adminData.fullName.toUpperCase();
+            adminNameElement.style.fontWeight = "bold";
+        }
+    }
+});
+
+// LOG-OUT
+function logout() {
+    localStorage.clear();
+    window.location.reload()
+}
+
+// -----------------------------------------------------------------------------------------------
