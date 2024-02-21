@@ -356,7 +356,7 @@
                                             <div class="form-group">
                                                 <label for="username">Category Image:</label>
                                                 <input onchange="addProductImage()" type="file" class="form-control"
-                                                    id="productimage" placeholder="browse images" name="images"
+                                                    id="categoryImages" placeholder="browse images" name="images"
                                                     accept="image/*" multiple>
                                             </div>
                                             <img id="selectedImage"
@@ -600,17 +600,20 @@
         // ---------------------------------------------------------------------------------------------------
         // CREATE CATEGORY
         function createCategory() {
-            let body = {
-                categoryName: document.getElementById("categoryname").value,
-                description: document.getElementById("categorydescription").value,
-                categoryImages: document.getElementById("categoryImages").value,
-            }
+            let formData = new FormData();
+            formData.append('categoryname', document.getElementById("categoryname").value);
+            formData.append('description', document.getElementById("categorydescription").value);
+            let imageInput = document.getElementById("categoryImages");
+            let imageFile = imageInput.files[0]; // Assuming the input is of type 
+
+            // Append the image file to FormData
+            formData.append('file', imageFile);
             fetch("http://localhost:5001/category/createCategory", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(body),
+                body: formData
             })
                 .then(response => response.json())
                 .then(data => {
