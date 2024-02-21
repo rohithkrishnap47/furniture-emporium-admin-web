@@ -201,3 +201,28 @@ async function changeStatus(status, id) {
         console.error('Error updating status:', error);
     }
 }
+
+
+// -----------------------------------------------------------------------------------------------
+// ADMIN-INFO
+document.addEventListener("DOMContentLoaded", function () {
+    var adminInfo = localStorage.getItem("admin-Info");
+
+    if (adminInfo) {
+        var adminData = JSON.parse(adminInfo);
+
+        var adminNameElement = document.getElementById("adminName");
+        if (adminNameElement) {
+            adminNameElement.textContent = adminData.fullName.toUpperCase();
+            adminNameElement.style.fontWeight = "bold";
+        }
+    }
+});
+
+// LOG-OUT
+function logout() {
+    localStorage.clear();
+    window.location.reload()
+}
+
+// -----------------------------------------------------------------------------------------------
