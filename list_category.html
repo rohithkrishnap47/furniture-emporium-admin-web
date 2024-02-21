@@ -499,7 +499,12 @@
                 row.appendChild(nameCell);
 
                 const imageCell = document.createElement("td");
-                imageCell.textContent = item.categoryImages;
+                const imageElement = document.createElement("img");
+                imageElement.src = item.categoryImages[0];
+                imageElement.alt = "Category Image";
+                imageElement.width = 200;
+                imageElement.height = 200;
+                imageCell.appendChild(imageElement)
                 row.appendChild(imageCell);
 
                 const descriptionCell = document.createElement("td");
@@ -515,7 +520,7 @@
                     selectedProductid = item._id
                     document.getElementById("categoryname").value = item.categoryName
                     document.getElementById("categorydescription").value = item.description
-                    document.getElementById("categoryImages").value = item.categoryImages
+                    // document.getElementById("categoryImages").value = item.categoryImages
                     console.log("PRODUCT UPDATE BUTTON clicked");
                     $('#myModal').modal('show')
                 });
