@@ -7,7 +7,7 @@ function displayuser() {
         .then(response => response.json())
         .then(data => {
             user = data.data
-                console.log("deiiiii",data.data);
+            console.log("deiiiii", data.data);
             setUser()
         })
         .catch(error => {
@@ -24,7 +24,7 @@ function setUser() {
         row.appendChild(idCell);
 
         const userCell = document.createElement("td");
-        userCell.textContent = item.firstname;        ;
+        userCell.textContent = item.firstname;;
         row.appendChild(userCell);
 
         const emailCell = document.createElement("td");
@@ -135,7 +135,7 @@ function createBanner() {
                 Swal.fire({
                     icon: 'ERROR !',
                     title: 'Please fill ...',
-                    text: "Required fields :"+data.error.missing
+                    text: "Required fields :" + data.error.missing
                 })
             }
             else {
@@ -152,21 +152,29 @@ function createBanner() {
 
 
 
+// -----------------------------------------------------------------------------------------------
+// ADMIN-INFO
+document.addEventListener("DOMContentLoaded", function () {
+    var adminInfo = localStorage.getItem("admin-Info");
 
+    if (adminInfo) {
+        var adminData = JSON.parse(adminInfo);
 
+        var adminNameElement = document.getElementById("adminName");
+        if (adminNameElement) {
+            adminNameElement.textContent = adminData.fullName.toUpperCase();
+            adminNameElement.style.fontWeight = "bold";
+        }
+    }
+});
 
+// LOG-OUT
+function logout() {
+    localStorage.clear();
+    window.location.reload()
+}
 
-
-
-
-
-
-
-
-
-
-
-
+// -----------------------------------------------------------------------------------------------
 
 
 
