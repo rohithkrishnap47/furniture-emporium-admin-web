@@ -285,7 +285,8 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="adminName">#admin_here</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"
+                                    id="adminName">#admin_here</span>
                                 <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -575,19 +576,26 @@
 
         // UPDATE CATEGORY FUNCTION
         function updateCategory() {
-            var categoryName = document.getElementById("categoryname").value;
-            var description = document.getElementById("categorydescription").value;
-            var description = document.getElementById("categoryImages").value;
-            let body = {
-                name: categoryName,
-                description: description,
-            }
+            const categoryname = document.getElementById("categoryname")
+            const categorydescription = document.getElementById("categorydescription")
+            let formData = new FormData();
+            formData.append('categoryName', categoryname.value);
+            formData.append('description', categorydescription.value);
+            let imageInput = document.getElementById("categoryImages");
+            let imageFile = imageInput?.files[0];
+
+            formData.append('file', imageFile);
+
+            // let body = {
+            //     name: categoryname,
+            //     description: description,
+            // }
             fetch("http://localhost:5001/category/updatecategory/" + selectedProductid, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(body),
+                body: formData,
             })
                 .then(response => response.json())
                 .then(data => {
@@ -615,9 +623,6 @@
             formData.append('file', imageFile);
             fetch("http://localhost:5001/category/createCategory", {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
                 body: formData
             })
                 .then(response => response.json())
@@ -643,24 +648,20 @@
 
         // image
         function addProductImage() {
-            let imageInput = document.getElementById("productimage");
-            const input = document.getElementById('productimage');
+            let imageInput = document.getElementById("producticategoryImagesmage");
+            const input = document.getElementById('categoryImages');
             const selectedImage = document.getElementById('selectedImage');
 
             // Check if any file is selected
             if (input.files && input.files.length > 0) {
-                // Assuming you only want to display the first selected image
                 const file = input.files[0];
 
-                // Create a FileReader to read the image
                 const reader = new FileReader();
 
-                // Set the callback for when the image is loaded
                 reader.onload = function (e) {
                     selectedImage.src = e.target.result;
                 };
 
-                // Read the image as a data URL
                 reader.readAsDataURL(file);
             } else {
                 // No file selected, clear the displayed image
