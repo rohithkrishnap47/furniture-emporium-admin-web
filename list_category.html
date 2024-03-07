@@ -586,15 +586,14 @@
 
             formData.append('file', imageFile);
 
-            // let body = {
+            // let body = { 
             //     name: categoryname,
             //     description: description,
             // }
+            console.log("ambadi ",categoryname.value);
+            console.log("jinjinakkadi ",categorydescription.value);
             fetch("http://localhost:5001/category/updatecategory/" + selectedProductid, {
                 method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
                 body: formData,
             })
                 .then(response => response.json())
@@ -614,7 +613,7 @@
         // CREATE CATEGORY
         function createCategory() {
             let formData = new FormData();
-            formData.append('categoryname', document.getElementById("categoryname").value);
+            formData.append('categoryName', document.getElementById("categoryname").value);
             formData.append('description', document.getElementById("categorydescription").value);
             let imageInput = document.getElementById("categoryImages");
             let imageFile = imageInput.files[0]; // Assuming the input is of type 
